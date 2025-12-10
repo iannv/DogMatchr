@@ -21,7 +21,7 @@ export class Inicio {
   arrAllRazas: Dogapi[] = [];
 
   ngOnInit() {
-    this.getRazasLimit(5);
+    this.getRazasLimit(20);
     // this.getAllRazas();
   }
 

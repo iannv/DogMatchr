@@ -4,20 +4,21 @@ export interface RazaResponse {
 }
 
 export interface Dogapi {
-  weight: {
-    imperial: string;
-    metric: string;
+  weight?: {
+    imperial?: string;
+    metric?: string;
   };
-  height: {
-    imperial: string;
-    metric: string;
+  height?: {
+    imperial?: string;
+    metric?: string;
   };
   id: number;
   name: string;
   breed_group?: string;
   bred_for?: string;
-  life_span: string;
-  temperament: string;
+  life_span?: string;
+  temperament?: string;
+  origin?: string;
   reference_image_id: string | null;
   image?: Image | null;
 }
