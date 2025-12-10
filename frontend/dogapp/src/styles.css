@@ -6,8 +6,12 @@
 :root {
     --fredoka: "Fredoka", sans-serif --n100: #FFD5B8;
     --elms-sans: "Elms Sans", sans-serif;
+
+    --n50: #FFF9EB;
+    --n100: #FFD5B8;
     --n500: #FF8D08;
 
+    --g50: #EDE7DC;
     --g500: #4A5565;
 }
 
@@ -19,6 +23,7 @@ body {
     font-family: var(--fredoka) !important;
     background-color: var(--surface-50);
     color: var(--typography-color);
+    background-color: var(--n50) !important;
 }
 
 html,

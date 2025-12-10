@@ -73,7 +73,16 @@ input,
 
 
 /* Section cards */
-
+#sectionCards div:last-of-type{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 1rem;
+    /* background-color: greenyellow !important; */
+}
 
 
 @media (min-width: 576px) {
