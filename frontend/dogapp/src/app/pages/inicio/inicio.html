@@ -28,13 +28,14 @@
     <!-- Section cards -->
     <section id="sectionCards">
         <div>
-            <h3>1000 razas encontradas</h3>
-            <a href="#">Ver más</a>
+            <a routerLink="razas">Descubrir más
+                <i class="pi pi-arrow-right" style="color: var(--g900) ;"></i>
+            </a>
         </div>
 
         @if (arrRazasLimit.length > 0) {
-        <div>
-            @for (raza of arrRazasLimit; track $index) {
+        <div class="cards-container">
+            @for (raza of arrRazasLimit; track raza.id) {
             <app-card-dog [dog]="raza"></app-card-dog>
             }
         </div>
