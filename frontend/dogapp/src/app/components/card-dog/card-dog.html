@@ -1,15 +1,18 @@
-<p-card [style]="{ width: '20rem', overflow: 'hidden' }">
+<p-card>
     <ng-template #header>
         <img alt="Card" src="{{dog.image?.url}}" class="dog-img" />
     </ng-template>
-    <ng-template #title> {{dog.name}} </ng-template>
+    <ng-template #title id="template-title"> {{dog.name}} </ng-template>
     <ng-template #subtitle> {{dog.bred_for}} </ng-template>
 
-    <p-chip label="Action" />
+    @for (t of temperament; track $index) {
+    <p-chip label="{{t}}" />
+    }
+
 
     <ng-template #footer id="templateFooter">
         <div class="templateFooter-div">
-            <div>
+            <div class="img-wrapper">
                 <img src="assets/reloj.png" class="img-origin-life" alt="life span">
                 <p>{{dog.life_span}}</p>
             </div>

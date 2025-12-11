@@ -71,9 +71,14 @@ input,
     height: 48px !important;
 }
 
-
 /* Section cards */
-#sectionCards div:last-of-type{
+#sectionCards {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+#sectionCards div:last-of-type {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -84,11 +89,34 @@ input,
     /* background-color: greenyellow !important; */
 }
 
+#sectionCards div:first-of-type {
+    width: 155px;
+    margin-top: 1rem;
+    margin-right: 3.5rem;
+}
+
+a {
+    text-decoration: none;
+    color: var(--g900);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px;
+    font-weight: 600;
+    opacity: 0.7;
+}
+
+a:hover {
+    opacity: 1;
+    transition: 0.2s;
+}
+
 
 @media (min-width: 576px) {
     h1 {
         font-size: 32px;
     }
+
 }
 
 
@@ -97,7 +125,7 @@ input,
         font-size: 38px;
     }
 
-    h2{
+    h2 {
         font-size: 20px;
     }
 }
