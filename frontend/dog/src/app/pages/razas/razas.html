@@ -1,1 +1,11 @@
-<p>razas works!</p>
+<section id="paginatorRazas">
+
+    <div class="cards-container">
+        @for (raza of razasPaginadas(); track $index) {
+        <app-card-dog [dog]="raza"></app-card-dog>
+        }
+    </div>
+
+    <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="arrAllRazas.length"
+        [showCurrentPageReport]="true" />
+</section>
