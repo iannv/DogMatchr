@@ -1,11 +1,25 @@
-<section id="paginatorRazas">
+<main>
+    <section id="paginatorRazas">
 
-    <div class="cards-container">
-        @for (raza of razasPaginadas(); track $index) {
-        <app-card-dog [dog]="raza"></app-card-dog>
-        }
-    </div>
+        <div class="margin-header">
+            <div id="div-title">
+                <h1>Descubrí tu próxima raza favorita</h1>
+                <p>
+                    Conocé las <strong>170 razas</strong> que tenemos para vos.
+                </p>
+                <p>
+                    Cada página muestra <strong>20 perfiles</strong> con información detallada.
+                </p>
+            </div>
 
-    <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="arrAllRazas.length"
-        [showCurrentPageReport]="true" />
-</section>
+            <div class="cards-container">
+                @for (raza of razasPaginadas(); track $index) {
+                <app-card-dog [dog]="raza"></app-card-dog>
+                }
+            </div>
+        </div>
+
+        <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows"
+            [totalRecords]="arrAllRazas.length" [showCurrentPageReport]="true" />
+    </section>
+</main>

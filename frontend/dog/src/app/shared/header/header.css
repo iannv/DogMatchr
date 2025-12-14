@@ -1,0 +1,39 @@
+/* Para el inicio hay que hacer un header a parte o con alguna variable
+pasarle con input en le app-header del inicio para que sea transparente */
+::ng-deep p-menubar {
+    position: fixed !important;
+    width: 100vw !important;
+    background: linear-gradient(140deg, var(--n500) 25%, var(--n300), var(--n100)) !important;
+    border: none !important;
+    border-radius: 0 !important;
+    color: white !important;
+    padding: 0.7rem !important;
+    z-index: 999 !important;
+}
+
+span {
+    color: white;
+    font-weight: 700;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+::ng-deep .p-menubar-root-list {
+    background: linear-gradient(140deg, var(--n500)) !important;
+}
+
+::ng-deep .p-menubar-item-content {
+    padding: 8px;
+}
+
+::ng-deep .p-menubar-item-content:hover {
+    background-color: rgba(255, 255, 255, 0.25) !important;
+    color: #C2410C !important;
+    transition: 0.5s;
+}
+
+::ng-deep .p-menubar-item.p-focus>.p-menubar-item-content {
+    background-color: #ffffff !important;
+    color: #EA580C !important;
+    border-radius: 6px !important;
+}

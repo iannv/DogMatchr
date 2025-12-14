@@ -21,7 +21,7 @@
     --g500: #4A5565;
     --g600: #474747;
     --g700: #3B3B3B;
-    --n900: #0A0A0A;
+    --g900: #0A0A0A;
 }
 
 
@@ -49,4 +49,8 @@ div {
     font-family: var(--elms-sans) !important;
     letter-spacing: 0.5px;
     word-spacing: -3px;
+}
+
+.margin-header {
+    margin-top: 8rem;
 }
