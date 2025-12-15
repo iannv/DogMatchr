@@ -6,24 +6,24 @@ import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
 import { CardDog } from '../../components/card-dog/card-dog';
 import { RazaService } from '../../services/raza-service';
-import { Dogapi, RazaResponse } from '../../models/RazaModel';
+import { Dogapi } from '../../models/RazaModel';
 import { RouterLink } from '@angular/router';
+import { Spinner } from "../../components/spinner/spinner";
 
 @Component({
   selector: 'app-inicio',
-  imports: [FormsModule, InputTextModule, ButtonModule, IconField, InputIcon, CardDog, RouterLink],
+  imports: [FormsModule, InputTextModule, ButtonModule, IconField, InputIcon, CardDog, RouterLink, Spinner],
   templateUrl: './inicio.html',
   styleUrl: './inicio.css',
 })
 export class Inicio implements OnInit, OnChanges {
   constructor(private razaService: RazaService) {}
 
+  cargando: boolean = false;
   arrRazasLimit: Dogapi[] = [];
-  arrAllRazas: Dogapi[] = [];
 
   ngOnInit() {
     this.getRazasLimit(20);
-    // this.getAllRazas();
   }
 
   ngOnChanges(): void {
@@ -31,14 +31,11 @@ export class Inicio implements OnInit, OnChanges {
   }
 
   public getRazasLimit(limit: number) {
+    this.cargando = true;
     this.razaService.getRazas().subscribe((respuesta) => {
       this.arrRazasLimit = respuesta.slice(0, limit);
+      this.cargando = false;
     });
   }
 
-  // public getAllRazas() {
-  //   this.razaService.getRazas().subscribe((respuesta) => {
-  //     this.arrAllRazas = respuesta;
-  //   });
-  // }
 }

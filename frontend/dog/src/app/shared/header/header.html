@@ -6,7 +6,8 @@
             </svg>
         </ng-template>
         <ng-template #item let-item let-root="root">
-            <a pRipple class="flex items-center px-4 py-3 cursor-pointer gap-2">
+            <a pRipple class="flex items-center px-4 py-3 cursor-pointer gap-2" [routerLink]="item.routerLink"
+                routerLinkActive="p-highlight" [routerLinkActiveOptions]="{ exact: true }">
                 <span>{{ item.label }}</span>
                 <p-badge *ngIf="item.badge" [ngClass]="{ 'ms-auto': !root }" [value]="item.badge" />
                 <span *ngIf="item.shortcut"

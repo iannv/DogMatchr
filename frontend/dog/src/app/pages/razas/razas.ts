@@ -3,14 +3,16 @@ import { PaginatorModule, PaginatorState } from 'primeng/paginator';
 import { RazaService } from '../../services/raza-service';
 import { Dogapi } from '../../models/RazaModel';
 import { CardDog } from '../../components/card-dog/card-dog';
+import { Spinner } from "../../components/spinner/spinner";
 
 @Component({
   selector: 'app-razas',
-  imports: [PaginatorModule, CardDog],
+  imports: [PaginatorModule, CardDog, Spinner],
   templateUrl: './razas.html',
   styleUrl: './razas.css',
 })
 export class Razas implements OnInit {
+  cargando: boolean = false;
   first: number = 0;
   rows: number = 20;
   arrAllRazas: Dogapi[] = [];
@@ -22,8 +24,10 @@ export class Razas implements OnInit {
   }
 
   public getAllRazas() {
+    this.cargando = true;
     this.razaService.getRazas().subscribe((respuesta) => {
       this.arrAllRazas = respuesta;
+      this.cargando = false;
     });
   }
 

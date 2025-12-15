@@ -24,6 +24,7 @@ span {
 
 ::ng-deep .p-menubar-item-content {
     padding: 8px;
+    box-sizing: border-box;
 }
 
 ::ng-deep .p-menubar-item-content:hover {
@@ -33,7 +34,16 @@ span {
 }
 
 ::ng-deep .p-menubar-item.p-focus>.p-menubar-item-content {
-    background-color: #ffffff !important;
+    background-color: var(--n800) !important;
     color: #EA580C !important;
     border-radius: 6px !important;
+}
+/* 
+::ng-deep .p-menubar-item.p-highlight>.p-menubar-item-content {
+    background-color: var(--n800) !important;
+    color: #EA580C !important;
+} */
+
+a{
+    text-decoration: none;
 }
