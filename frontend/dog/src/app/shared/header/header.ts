@@ -6,11 +6,11 @@ import { InputTextModule } from 'primeng/inputtext';
 import { CommonModule } from '@angular/common';
 import { Ripple } from 'primeng/ripple';
 import { Menubar } from 'primeng/menubar';
-import { RouterLinkActive } from "@angular/router";
+import { RouterLinkActive, RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-header',
-  imports: [Menubar, BadgeModule, AvatarModule, InputTextModule, Ripple, CommonModule, RouterLinkActive],
+  imports: [Menubar, BadgeModule, AvatarModule, InputTextModule, Ripple, CommonModule, RouterLinkActive, RouterLink],
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
@@ -21,13 +21,15 @@ export class Header {
     this.items = [
       {
         label: 'INICIO',
-        icon: 'pi pi-home',
+        routerLink: '',
       },
       {
         label: 'RAZAS',
+        routerLink: '/razas',
       },
       {
         label: '¡ENCONTRAR A MI COMPAÑERO!',
+        routerLink: '',
       },
     ];
   }
