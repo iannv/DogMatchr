@@ -36,9 +36,13 @@
         @if (arrRazasLimit) {
         <div class="cards-container">
             @for (raza of arrRazasLimit; track raza.id) {
-            <app-card-dog [dog]="raza"></app-card-dog>
+            <app-card-dog [dog]="raza" (dialog)="openDialogDetalleDog($event)"></app-card-dog>
             }
         </div>
+
+        @if (selectedRaza) {
+        <app-detalle-dog [razaResponse]="selectedRaza" [(visible)]="dialogVisible"></app-detalle-dog>
+        }
         }
     </section>
 

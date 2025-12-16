@@ -1,1 +1,28 @@
-<p>detalle-dog works!</p>
+<div class="card flex justify-center">
+    <p-dialog header="{{razaResponse?.dogapi?.name}}" [(visible)]="visible" [modal]="true" (onHide)="closeDialog()"
+        [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [style]="{ width: '50vw' }" [draggable]="false"
+        [resizable]="false">
+
+        <img alt="Card" src="{{razaResponse?.dogapi?.image?.url}}" class="dog-img" />
+        <!-- <img alt="Card" src="{{razaResponse?.ninja}}" class="dog-img" /> -->
+
+
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+        </p>
+
+        <section id="templateFooter">
+            <div class="templateFooter-div">
+                <div class="img-wrapper">
+                    <img src="assets/reloj.png" class="img-origin-life" alt="life span">
+                    <p>{{razaResponse?.dogapi?.life_span}}</p>
+                </div>
+                <div>
+                    <img src="assets/pais.png" class="img-origin-life" alt="origin">
+                    @if (razaResponse?.dogapi?.origin) { <p>{{razaResponse?.dogapi?.origin}}</p> } @else {<p>-</p>}
+                </div>
+            </div>
+        </section>
+    </p-dialog>
+</div>

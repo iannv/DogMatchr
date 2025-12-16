@@ -1,17 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { PaginatorModule, PaginatorState } from 'primeng/paginator';
 import { RazaService } from '../../services/raza-service';
-import { Dogapi } from '../../models/RazaModel';
+import { Dogapi, RazaResponse } from '../../models/RazaModel';
 import { CardDog } from '../../components/card-dog/card-dog';
-import { Spinner } from "../../components/spinner/spinner";
+import { Spinner } from '../../components/spinner/spinner';
+import { DetalleDog } from '../../components/detalle-dog/detalle-dog';
 
 @Component({
   selector: 'app-razas',
-  imports: [PaginatorModule, CardDog, Spinner],
+  imports: [PaginatorModule, CardDog, Spinner, DetalleDog],
   templateUrl: './razas.html',
   styleUrl: './razas.css',
 })
 export class Razas implements OnInit {
+  selectedRaza?: RazaResponse;
+  dialogVisible = false;
+
   cargando: boolean = false;
   first: number = 0;
   rows: number = 20;
@@ -35,10 +39,18 @@ export class Razas implements OnInit {
     this.first = event.first ?? 0;
     this.rows = event.rows ?? 20;
     // Scroll automático hacia arriba al cambiar de página
-    window.scrollTo({top: 0, behavior: 'smooth'});
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  razasPaginadas(): Dogapi[]{
+  razasPaginadas(): Dogapi[] {
     return this.arrAllRazas.slice(this.first, this.first + this.rows);
+  }
+
+  openDialogDetalleDog(dog: Dogapi) {
+    this.selectedRaza = {
+      dogapi: dog,
+      ninja: [],
+    };
+    this.dialogVisible = true;
   }
 }
