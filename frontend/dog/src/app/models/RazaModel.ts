@@ -14,14 +14,14 @@ export interface Dogapi {
     imperial?: string;
     metric?: string;
   };
-  id: number;
-  name: string;
+  id?: number;
+  name?: string;
   breed_group?: string;
   bred_for?: string;
   life_span?: string;
   temperament?: string;
   origin?: string;
-  reference_image_id: string | null;
+  reference_image_id?: string | null;
   image?: Image | null;
 }
 
@@ -56,5 +56,5 @@ export interface Ninja {
   min_height_female?: number;
   min_weight_male?: number;
   min_weight_female?: number;
-  name: string;
+  name?: string;
 }

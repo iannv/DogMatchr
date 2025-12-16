@@ -6,18 +6,32 @@ import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
 import { CardDog } from '../../components/card-dog/card-dog';
 import { RazaService } from '../../services/raza-service';
-import { Dogapi } from '../../models/RazaModel';
+import { Dogapi, RazaResponse } from '../../models/RazaModel';
 import { RouterLink } from '@angular/router';
-import { Spinner } from "../../components/spinner/spinner";
+import { Spinner } from '../../components/spinner/spinner';
+import { DetalleDog } from "../../components/detalle-dog/detalle-dog";
 
 @Component({
   selector: 'app-inicio',
-  imports: [FormsModule, InputTextModule, ButtonModule, IconField, InputIcon, CardDog, RouterLink, Spinner],
+  imports: [
+    FormsModule,
+    InputTextModule,
+    ButtonModule,
+    IconField,
+    InputIcon,
+    CardDog,
+    RouterLink,
+    Spinner,
+    DetalleDog
+],
   templateUrl: './inicio.html',
   styleUrl: './inicio.css',
 })
 export class Inicio implements OnInit, OnChanges {
   constructor(private razaService: RazaService) {}
+
+  selectedRaza?: RazaResponse;
+  dialogVisible = false;
 
   cargando: boolean = false;
   arrRazasLimit: Dogapi[] = [];
@@ -38,4 +52,11 @@ export class Inicio implements OnInit, OnChanges {
     });
   }
 
+  openDialogDetalleDog(dog: Dogapi) {
+    this.selectedRaza = {
+      dogapi: dog,
+      ninja: [],
+    };
+    this.dialogVisible = true;
+  }
 }

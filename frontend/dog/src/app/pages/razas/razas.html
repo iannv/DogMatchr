@@ -5,17 +5,17 @@
             <div id="div-title">
                 <h1>Descubrí tu próxima raza favorita</h1>
                 <p>
-                    Conocé las <strong>170 razas</strong> que tenemos para vos.
+                    ¡Conocé las <strong>{{arrAllRazas.length}} razas</strong> que tenemos para vos!
                 </p>
                 <p>
-                    Cada página muestra <strong>20 perfiles</strong> con información detallada.
+                    Cada página muestra 20 perfiles con información detallada.
                 </p>
             </div>
 
             @if (!cargando) {
             <div class="cards-container">
                 @for (raza of razasPaginadas(); track $index) {
-                <app-card-dog [dog]="raza"></app-card-dog>
+                <app-card-dog [dog]="raza" (dialog)="openDialogDetalleDog($event)"></app-card-dog>
                 }
             </div>
             } @else {
@@ -26,6 +26,10 @@
         @if (!cargando) {
         <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows"
             [totalRecords]="arrAllRazas.length" [showCurrentPageReport]="true" />
+        }
+
+        @if (selectedRaza) {
+        <app-detalle-dog [razaResponse]="selectedRaza" [(visible)]="dialogVisible"></app-detalle-dog>
         }
 
     </section>
