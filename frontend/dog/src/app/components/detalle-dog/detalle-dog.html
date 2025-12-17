@@ -3,17 +3,9 @@
         [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [style]="{ width: '50vw' }" [draggable]="false"
         [resizable]="false">
 
+        @if (!cargando) {
         <img alt="Card" src="{{razaResponse?.dogapi?.image?.url}}" class="dog-img" />
-
-        
-        <p>ENERGY: {{ ninja?.energy }}</p>
-        
-
-        <p>{{razaResponse?.dogapi?.bred_for}}</p>
-
-        @for (t of temperament; track $index) {
-        <p-chip label="{{t}}" class="chip-detalle" />
-        }
+        <img alt="{{ninja?.name}}" src="{{ninja?.image_link}}" class="dog-img" />
 
 
         <section id="templateFooter">
@@ -26,7 +18,90 @@
                     <img src="assets/pais.png" class="img-origin-life" alt="origin">
                     @if (razaResponse?.dogapi?.origin) { <p>{{razaResponse?.dogapi?.origin}}</p> } @else {<p>-</p>}
                 </div>
+                <div class="img-wrapper">
+                    <img src="" class="img-origin-life" alt="coat length">
+                    <p>Pelaje: <span></span></p>
+                </div>
+                <div class="img-wrapper">
+                    <img src="" class="img-origin-life" alt="coat length">
+                    <p>Altura: <span></span></p>
+                </div>
+                <div class="img-wrapper">
+                    <img src="" class="img-origin-life" alt="coat length">
+                    <p>Peso: <span></span></p>
+                </div>
             </div>
         </section>
+
+
+        <p>{{razaResponse?.dogapi?.bred_for}}</p>
+
+        @for (t of temperament; track $index) {
+        <p-chip label="{{t}}" class="chip-detalle" />
+        }
+
+        <!-- 
+            Muda de pelo
+            Aseo (grooming)
+            Babeo
+            Largo del pelaje
+
+            Altura max y min
+            Peso max y min
+        -->
+        <section class="section-props">
+            <div id="section-div-props">
+                <div class="div-props">
+                    <img src="assets/energia.png" alt="">
+                    <p>Energía</p>
+                    <span>Moderado</span>
+                </div>
+                <div class="div-props">
+                    <img src="assets/protector.png" alt="">
+                    <p>Protector</p>
+                    <span>Moderado</span>
+                </div>
+                <div class="div-props">
+                    <img src="assets/adiestramiento.png" alt="">
+                    <p>Adiestramiento</p>
+                    <span>Moderado</span>
+                </div>
+                <div class="div-props">
+                    <img src="assets/jugueton.png" alt="">
+                    <p>Juguetón</p>
+                    <span>Moderado</span>
+                </div>
+                <div class="div-props">
+                    <img src="assets/ladrido.png" alt="">
+                    <p>Ladrido</p>
+                    <span>Moderado</span>
+                </div>
+                <div class="div-props">
+                    <img src="assets/aseo.png" alt="">
+                    <p>Aseo</p>
+                    <span>Moderado</span>
+                </div>
+
+            </div>
+
+            <div class="div-props-bottom">
+                <img src="" alt="">
+                <p>Bueno con niños<span></span></p>
+            </div>
+            <div class="div-props-bottom">
+                <img src="" alt="">
+                <p>Bueno con extraños<span></span></p>
+            </div>
+            <div class="div-props-bottom">
+                <img src="" alt="">
+                <p>Bueno con mascotas<span></span></p>
+            </div>
+        </section>
+
+
+        } @else {
+        <app-spinner></app-spinner>
+        }
+
     </p-dialog>
 </div>

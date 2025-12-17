@@ -2,3 +2,71 @@
     background-color: var(--n200) !important;
     color: var(--n800) !important;
 }
+
+.section-props {
+    /* display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 10px; */
+}
+
+#section-div-props {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+#section-div-props .div-props:first-of-type img {
+    width: 52px;
+}
+
+.div-props {
+    background-color: var(--g100);
+    border-radius: 8px;
+    width: 50%;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.div-props img {
+    width: 34px;
+}
+
+.div-props p {
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+}
+
+.div-props span {
+    font-size: 16px;
+}
+
+
+
+
+/* QUERIES */
+
+@media (min-width: 576px) {}
+
+
+@media (min-width: 768px) {
+    .div-props {
+        width: 180px;
+        justify-content: space-between;
+    }
+}
+
+
+@media (min-width: 992px) {}
+
+
+@media (min-width: 1200px) {}
+
+
+@media (min-width: 1400px) {}
