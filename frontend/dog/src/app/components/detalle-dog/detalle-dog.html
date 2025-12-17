@@ -4,13 +4,17 @@
         [resizable]="false">
 
         <img alt="Card" src="{{razaResponse?.dogapi?.image?.url}}" class="dog-img" />
-        <!-- <img alt="Card" src="{{razaResponse?.ninja}}" class="dog-img" /> -->
 
+        
+        <p>ENERGY: {{ ninja?.energy }}</p>
+        
 
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-        </p>
+        <p>{{razaResponse?.dogapi?.bred_for}}</p>
+
+        @for (t of temperament; track $index) {
+        <p-chip label="{{t}}" class="chip-detalle" />
+        }
+
 
         <section id="templateFooter">
             <div class="templateFooter-div">
