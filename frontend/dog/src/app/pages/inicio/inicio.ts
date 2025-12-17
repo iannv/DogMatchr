@@ -30,7 +30,7 @@ import { DetalleDog } from "../../components/detalle-dog/detalle-dog";
 export class Inicio implements OnInit, OnChanges {
   constructor(private razaService: RazaService) {}
 
-  selectedRaza?: RazaResponse;
+  selectedRaza!: string;
   dialogVisible = false;
 
   cargando: boolean = false;
@@ -53,10 +53,7 @@ export class Inicio implements OnInit, OnChanges {
   }
 
   openDialogDetalleDog(dog: Dogapi) {
-    this.selectedRaza = {
-      dogapi: dog,
-      ninja: [],
-    };
+    this.selectedRaza = dog.name!;
     this.dialogVisible = true;
   }
 }

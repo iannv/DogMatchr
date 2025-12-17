@@ -18,6 +18,11 @@ export class RazaService {
   public getRazaByName(nombre: string): Observable<Dogapi[]> {
     return this.http.get<Dogapi[]>(`${this.urlApi}${nombre}`);
   }
+
+  public getRazaDetalle(nombre: string): Observable<RazaResponse> {
+    return this.http.get<RazaResponse>(`${this.urlApi}${nombre}`);
+  }
+
   // public getRazaByName(nombre: string): Observable<RazaResponse> {
   //   return this.http.get<RazaResponse>(`${this.urlApi}${nombre}`);
   // }

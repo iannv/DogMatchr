@@ -13,7 +13,7 @@ import { DetalleDog } from '../../components/detalle-dog/detalle-dog';
   styleUrl: './razas.css',
 })
 export class Razas implements OnInit {
-  selectedRaza?: RazaResponse;
+  selectedRaza!: string;
   dialogVisible = false;
 
   cargando: boolean = false;
@@ -47,10 +47,7 @@ export class Razas implements OnInit {
   }
 
   openDialogDetalleDog(dog: Dogapi) {
-    this.selectedRaza = {
-      dogapi: dog,
-      ninja: [],
-    };
+    this.selectedRaza = dog.name!;
     this.dialogVisible = true;
   }
 }
