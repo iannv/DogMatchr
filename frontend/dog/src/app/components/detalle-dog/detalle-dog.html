@@ -18,6 +18,13 @@
                     <img src="assets/pais.png" class="img-origin-life" alt="origin">
                     @if (razaResponse?.dogapi?.origin) { <p>{{razaResponse?.dogapi?.origin}}</p> } @else {<p>-</p>}
                 </div>
+
+                <p>{{razaResponse?.dogapi?.bred_for}}</p>
+
+                @for (t of temperament; track $index) {
+                <p-chip label="{{t}}" class="chip-detalle" />
+                }
+
                 <div class="img-wrapper">
                     <img src="" class="img-origin-life" alt="coat length">
                     <p>Pelaje: <span></span></p>
@@ -32,13 +39,6 @@
                 </div>
             </div>
         </section>
-
-
-        <p>{{razaResponse?.dogapi?.bred_for}}</p>
-
-        @for (t of temperament; track $index) {
-        <p-chip label="{{t}}" class="chip-detalle" />
-        }
 
         <!-- 
             Muda de pelo
@@ -81,20 +81,25 @@
                     <p>Aseo</p>
                     <span>Moderado</span>
                 </div>
-
             </div>
 
+
             <div class="div-props-bottom">
-                <img src="" alt="">
-                <p>Bueno con niños<span></span></p>
+                <img src="assets/nino.png" alt="">
+                <p>Bueno con niños</p>
+                <span>Excelente compañero para familia con niños</span>
+                <!-- No recomendado para familias con niños pequeños -->
             </div>
             <div class="div-props-bottom">
                 <img src="" alt="">
-                <p>Bueno con extraños<span></span></p>
+                <p>Bueno con extraños</p>
+                <span>Puede tener problemas con extraños</span>
             </div>
             <div class="div-props-bottom">
                 <img src="" alt="">
-                <p>Bueno con mascotas<span></span></p>
+                <p>Bueno con mascotas</p>
+                <span>Se lleva bien con otras mascotas</span>
+                <!-- Puede tener problemas con otras mascotas -->
             </div>
         </section>
 

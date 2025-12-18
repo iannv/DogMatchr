@@ -1,3 +1,7 @@
+::ng-deep .p-dialog {
+    width: 70vw !important;
+}
+
 .chip-detalle {
     background-color: var(--n200) !important;
     color: var(--n800) !important;
@@ -16,31 +20,37 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    gap: 1rem;
 }
 
 #section-div-props .div-props:first-of-type img {
-    width: 52px;
+    width: 34px;
+    /* margin-top: -10px; */
 }
 
 .div-props {
     background-color: var(--g100);
     border-radius: 8px;
-    width: 50%;
-    height: 120px;
+    width: 100%;
+    height: 140px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .div-props img {
     width: 34px;
 }
 
+
 .div-props p {
     font-size: 14px;
     display: flex;
     flex-direction: column;
+    margin: 5px 0;
 }
 
 .div-props span {
@@ -48,25 +58,36 @@
 }
 
 
-
+.div-props-bottom img {
+    color: red;
+}
 
 /* QUERIES */
 
-@media (min-width: 576px) {}
-
-
-@media (min-width: 768px) {
+@media (min-width: 576px) {
     .div-props {
-        width: 180px;
+        width: 48%;
         justify-content: space-between;
     }
 }
 
 
+@media (min-width: 768px) {}
+
+
 @media (min-width: 992px) {}
 
 
-@media (min-width: 1200px) {}
+@media (min-width: 1200px) {
+    #section-div-props {
+        justify-content: space-between;
+    }
+
+    .div-props {
+        width: 32%;
+        justify-content: space-between;
+    }
+}
 
 
 @media (min-width: 1400px) {}
