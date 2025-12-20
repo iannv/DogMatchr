@@ -4,42 +4,48 @@
         [resizable]="false">
 
         @if (!cargando) {
-        <img alt="Card" src="{{razaResponse?.dogapi?.image?.url}}" class="dog-img" />
-        <img alt="{{ninja?.name}}" src="{{ninja?.image_link}}" class="dog-img" />
 
+        <section id="sectionTop">
+            <p-galleria [value]="images" [numVisible]="5" [circular]="true" [showItemNavigators]="true"
+                [showThumbnails]="false" [containerStyle]="{ 'max-width': '530px' }">
+                <ng-template pTemplate="item" let-item id="templateGallery">
+                    <img [src]="item.itemImageSrc" style="width: 100%; display: block;" />
+                </ng-template>
+            </p-galleria>
 
-        <section id="templateFooter">
-            <div class="templateFooter-div">
-                <div class="img-wrapper">
-                    <img src="assets/reloj.png" class="img-origin-life" alt="life span">
-                    <p>{{razaResponse?.dogapi?.life_span}}</p>
-                </div>
-                <div>
-                    <img src="assets/pais.png" class="img-origin-life" alt="origin">
-                    @if (razaResponse?.dogapi?.origin) { <p>{{razaResponse?.dogapi?.origin}}</p> } @else {<p>-</p>}
-                </div>
+            <section id="templateFooter">
+                <div class="templateFooter-div">
+                    <div class="img-wrapper">
+                        <img src="assets/reloj.png" class="img-origin-life" alt="life span">
+                        <p>{{razaResponse?.dogapi?.life_span}}</p>
+                    </div>
+                    <div>
+                        <img src="assets/pais.png" class="img-origin-life" alt="origin">
+                        @if (razaResponse?.dogapi?.origin) { <p>{{razaResponse?.dogapi?.origin}}</p> } @else {<p>-</p>}
+                    </div>
 
-                <p>{{razaResponse?.dogapi?.bred_for}}</p>
+                    <p>{{razaResponse?.dogapi?.bred_for}}</p>
 
-                @for (t of temperament; track $index) {
-                <p-chip label="{{t}}" class="chip-detalle" />
-                }
+                    @for (t of temperament; track $index) {
+                    <p-chip label="{{t}}" class="chip-detalle" />
+                    }
 
-                <div class="img-wrapper">
-                    <img src="" class="img-origin-life" alt="coat length">
-                    <p>Pelaje: <span></span></p>
+                    <div class="img-wrapper">
+                        <img src="" class="img-origin-life" alt="coat length">
+                        <p>Pelaje: <span></span></p>
+                    </div>
+                    <div class="img-wrapper">
+                        <img src="" class="img-origin-life" alt="coat length">
+                        <p>Altura: <span></span></p>
+                    </div>
+                    <div class="img-wrapper">
+                        <img src="" class="img-origin-life" alt="coat length">
+                        <p>Peso: <span></span></p>
+                    </div>
                 </div>
-                <div class="img-wrapper">
-                    <img src="" class="img-origin-life" alt="coat length">
-                    <p>Altura: <span></span></p>
-                </div>
-                <div class="img-wrapper">
-                    <img src="" class="img-origin-life" alt="coat length">
-                    <p>Peso: <span></span></p>
-                </div>
-            </div>
+            </section>
+
         </section>
-
         <!-- 
             Muda de pelo
             Aseo (grooming)
@@ -84,22 +90,31 @@
             </div>
 
 
-            <div class="div-props-bottom">
-                <img src="assets/nino.png" alt="">
-                <p>Bueno con niños</p>
-                <span>Excelente compañero para familia con niños</span>
-                <!-- No recomendado para familias con niños pequeños -->
-            </div>
-            <div class="div-props-bottom">
-                <img src="" alt="">
-                <p>Bueno con extraños</p>
-                <span>Puede tener problemas con extraños</span>
-            </div>
-            <div class="div-props-bottom">
-                <img src="" alt="">
-                <p>Bueno con mascotas</p>
-                <span>Se lleva bien con otras mascotas</span>
-                <!-- Puede tener problemas con otras mascotas -->
+            <div id="section-props-bottom">
+                <div class="div-props-bottom">
+                    <div>
+                        <img src="assets/nino_verde.png" alt="niños" class="props-bottom-img">
+                        <p class="p-verde">Bueno con niños</p>
+                    </div>
+                    <span class="s-verde">Excelente compañero para familia con niños</span>
+                    <!-- No recomendado para familias con niños pequeños -->
+                </div>
+                <div class="div-props-bottom">
+                    <div>
+                        <img src="assets/extranos_verde.png" alt="extraños" class="props-bottom-img">
+                        <p class="p-verde">Bueno con extraños</p>
+                    </div>
+                    <span class="s-verde">Amigable con personas nuevas</span>
+                    <!-- <span class="s-rojo">Puede tener problemas con extraños</span> -->
+                </div>
+                <div class="div-props-bottom">
+                    <div>
+                        <img src="assets/huella_verde.png" alt="mascotas" class="props-bottom-img">
+                        <p class="p-verde">Bueno con mascotas</p>
+                    </div>
+                    <span class="s-verde">Se lleva bien con otras mascotas</span>
+                    <!-- Puede tener problemas con otras mascotas -->
+                </div>
             </div>
         </section>
 

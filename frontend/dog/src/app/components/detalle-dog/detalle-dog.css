@@ -2,19 +2,26 @@
     width: 70vw !important;
 }
 
+::ng-deep .p-galleria {
+    border: none !important;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+::ng-deep #sectionTop .p-galleria {
+    margin: 0 auto;
+}
+
+#section-img {
+    display: flex;
+}
+
 .chip-detalle {
     background-color: var(--n200) !important;
     color: var(--n800) !important;
 }
 
-.section-props {
-    /* display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    gap: 10px; */
-}
-
-#section-div-props {
+#section-div-props,
+#section-props-bottom {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -45,7 +52,6 @@
     width: 34px;
 }
 
-
 .div-props p {
     font-size: 14px;
     display: flex;
@@ -58,9 +64,68 @@
 }
 
 
-.div-props-bottom img {
-    color: red;
+
+/* Template Footer */
+.templateFooter-div div {
+    display: flex;
+    align-items: center;
 }
+
+.templateFooter-div div:first-of-type {
+    margin-bottom: 10px;
+}
+
+
+.templateFooter-div div p {
+    margin: 0 0 0px 10px;
+    font-size: 14px;
+}
+
+.img-origin-life {
+    width: 16px;
+}
+
+
+
+/* Section props bottom */
+#section-props-bottom {
+    min-width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.div-props-bottom {
+    width: 100%;
+    height: 140px;
+    background-color: var(--v50);
+    border-radius: 8px;
+    border: 2px solid var(--v100);
+    padding: 1rem;
+}
+
+.div-props-bottom div:first-of-type {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.div-props-bottom .p-verde {
+    color: var(--v400);
+    font-weight: 500;
+}
+
+.div-props-bottom .s-verde {
+    color: var(--v300);
+}
+
+.props-bottom-img {
+    width: 25px;
+}
+
 
 /* QUERIES */
 
@@ -72,22 +137,29 @@
 }
 
 
-@media (min-width: 768px) {}
+@media (min-width: 768px) {
+    .div-props-bottom {
+        width: 48%;
+        justify-content: space-between;
+    }
+}
 
 
 @media (min-width: 992px) {}
 
 
 @media (min-width: 1200px) {
-    #section-div-props {
-        justify-content: space-between;
-    }
 
-    .div-props {
+    .div-props,
+    .div-props-bottom {
         width: 32%;
         justify-content: space-between;
     }
 }
 
 
-@media (min-width: 1400px) {}
+@media (min-width: 1400px) {
+    #sectionTop {
+        display: flex;
+    }
+}
