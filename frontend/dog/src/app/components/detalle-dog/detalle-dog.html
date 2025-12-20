@@ -7,7 +7,7 @@
 
         <section id="sectionTop">
             <p-galleria [value]="images" [numVisible]="5" [circular]="true" [showItemNavigators]="true"
-                [showThumbnails]="false" [containerStyle]="{ 'max-width': '530px' }">
+                [showThumbnails]="false" [containerStyle]="{ 'max-width': '520px' }">
                 <ng-template pTemplate="item" let-item id="templateGallery">
                     <img [src]="item.itemImageSrc" style="width: 100%; display: block;" />
                 </ng-template>
@@ -15,13 +15,16 @@
 
             <section id="templateFooter">
                 <div class="templateFooter-div">
-                    <div class="img-wrapper">
-                        <img src="assets/reloj.png" class="img-origin-life" alt="life span">
-                        <p>{{razaResponse?.dogapi?.life_span}}</p>
-                    </div>
-                    <div>
-                        <img src="assets/pais.png" class="img-origin-life" alt="origin">
-                        @if (razaResponse?.dogapi?.origin) { <p>{{razaResponse?.dogapi?.origin}}</p> } @else {<p>-</p>}
+                    <div class="div-vida-origen">
+                        <div>
+                            <img src="assets/pais.png" class="img-origin-life" alt="origin">
+                            @if (razaResponse?.dogapi?.origin) { <p>{{razaResponse?.dogapi?.origin}}</p> } @else {<p>-
+                            </p>}
+                        </div>
+                        <div class="img-wrapper">
+                            <img src="assets/reloj.png" class="img-origin-life" alt="life span">
+                            <p>{{razaResponse?.dogapi?.life_span}}</p>
+                        </div>
                     </div>
 
                     <p>{{razaResponse?.dogapi?.bred_for}}</p>
@@ -30,18 +33,35 @@
                     <p-chip label="{{t}}" class="chip-detalle" />
                     }
 
+                    @if (ninja) {
                     <div class="img-wrapper">
                         <img src="" class="img-origin-life" alt="coat length">
-                        <p>Pelaje: <span></span></p>
+                        <p>Pelaje: <span>Corto</span></p>
                     </div>
                     <div class="img-wrapper">
                         <img src="" class="img-origin-life" alt="coat length">
-                        <p>Altura: <span></span></p>
+                        <p>Altura: <span>{{(ninja.max_height_male!) * (2.54)}} cm</span></p>
                     </div>
                     <div class="img-wrapper">
                         <img src="" class="img-origin-life" alt="coat length">
-                        <p>Peso: <span></span></p>
+                        <p>Peso: <span>{{((ninja.max_weight_male!) / (2.205)).toFixed(1)}} kg</span></p>
                     </div>
+                    <!-- Información no disponible -->
+                    } @else {
+                    <div class="img-wrapper">
+                        <img src="" class="img-origin-life" alt="coat length">
+                        <p>Pelaje: <span class="no-disponible">No disponible</span></p>
+                    </div>
+                    <div class="img-wrapper">
+                        <img src="" class="img-origin-life" alt="coat length">
+                        <p>Altura: <span class="no-disponible">No disponible</span></p>
+                    </div>
+                    <div class="img-wrapper">
+                        <img src="" class="img-origin-life" alt="coat length">
+                        <p>Peso: <span class="no-disponible">No disponible</span></p>
+                    </div>
+                    }
+
                 </div>
             </section>
 
