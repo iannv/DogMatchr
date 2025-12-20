@@ -21,7 +21,19 @@
     --g500: #4A5565;
     --g600: #474747;
     --g700: #3B3B3B;
-    --n900: #0A0A0A;
+    --g900: #0A0A0A;
+
+    --v50: #F0FDF4;
+    --v100: #7DF1A9;
+    --v200: #00A63E;
+    --v300: #008236;
+    --v400: #0D542B;
+
+    --r50: #FEF2F2;
+    --r100: #FFA3A3;
+    --r200: #EA1E28;
+    --r300: #C10007;
+    --r400: #82181A;
 }
 
 
@@ -50,3 +62,25 @@ div {
     letter-spacing: 0.5px;
     word-spacing: -3px;
 }
+
+.margin-header {
+    margin-top: 8rem;
+}
+
+
+
+
+
+/* @media (min-width: 576px) {}
+
+
+@media (min-width: 768px) {}
+
+
+@media (min-width: 992px) {}
+
+
+@media (min-width: 1200px) {}
+
+
+@media (min-width: 1400px) {} */

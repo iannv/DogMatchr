@@ -1,0 +1,38 @@
+.margin-header {
+    margin: 2.5rem;
+}
+
+#paginatorRazas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#paginatorRazas div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 1rem;
+}
+
+::ng-deep p-paginator {
+    width: 100vw;
+    background-color: transparent !important;
+}
+
+#div-title {
+    width: 100%;
+    display: flex;
+    flex-direction: column !important;
+}
+
+#div-title p:first-of-type {
+    font-size: 20px;
+}
+
+#div-title p {
+    margin: 0;
+}

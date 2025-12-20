@@ -1,1 +1,127 @@
-<p>detalle-dog works!</p>
+<div class="card flex justify-center">
+    <p-dialog header="{{razaResponse?.dogapi?.name}}" [(visible)]="visible" [modal]="true" (onHide)="closeDialog()"
+        [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [style]="{ width: '50vw' }" [draggable]="false"
+        [resizable]="false">
+
+        @if (!cargando) {
+
+        <section id="sectionTop">
+            <p-galleria [value]="images" [numVisible]="5" [circular]="true" [showItemNavigators]="true"
+                [showThumbnails]="false" [containerStyle]="{ 'max-width': '530px' }">
+                <ng-template pTemplate="item" let-item id="templateGallery">
+                    <img [src]="item.itemImageSrc" style="width: 100%; display: block;" />
+                </ng-template>
+            </p-galleria>
+
+            <section id="templateFooter">
+                <div class="templateFooter-div">
+                    <div class="img-wrapper">
+                        <img src="assets/reloj.png" class="img-origin-life" alt="life span">
+                        <p>{{razaResponse?.dogapi?.life_span}}</p>
+                    </div>
+                    <div>
+                        <img src="assets/pais.png" class="img-origin-life" alt="origin">
+                        @if (razaResponse?.dogapi?.origin) { <p>{{razaResponse?.dogapi?.origin}}</p> } @else {<p>-</p>}
+                    </div>
+
+                    <p>{{razaResponse?.dogapi?.bred_for}}</p>
+
+                    @for (t of temperament; track $index) {
+                    <p-chip label="{{t}}" class="chip-detalle" />
+                    }
+
+                    <div class="img-wrapper">
+                        <img src="" class="img-origin-life" alt="coat length">
+                        <p>Pelaje: <span></span></p>
+                    </div>
+                    <div class="img-wrapper">
+                        <img src="" class="img-origin-life" alt="coat length">
+                        <p>Altura: <span></span></p>
+                    </div>
+                    <div class="img-wrapper">
+                        <img src="" class="img-origin-life" alt="coat length">
+                        <p>Peso: <span></span></p>
+                    </div>
+                </div>
+            </section>
+
+        </section>
+        <!-- 
+            Muda de pelo
+            Aseo (grooming)
+            Babeo
+            Largo del pelaje
+
+            Altura max y min
+            Peso max y min
+        -->
+        <section class="section-props">
+            <div id="section-div-props">
+                <div class="div-props">
+                    <img src="assets/energia.png" alt="">
+                    <p>Energía</p>
+                    <span>Moderado</span>
+                </div>
+                <div class="div-props">
+                    <img src="assets/protector.png" alt="">
+                    <p>Protector</p>
+                    <span>Moderado</span>
+                </div>
+                <div class="div-props">
+                    <img src="assets/adiestramiento.png" alt="">
+                    <p>Adiestramiento</p>
+                    <span>Moderado</span>
+                </div>
+                <div class="div-props">
+                    <img src="assets/jugueton.png" alt="">
+                    <p>Juguetón</p>
+                    <span>Moderado</span>
+                </div>
+                <div class="div-props">
+                    <img src="assets/ladrido.png" alt="">
+                    <p>Ladrido</p>
+                    <span>Moderado</span>
+                </div>
+                <div class="div-props">
+                    <img src="assets/aseo.png" alt="">
+                    <p>Aseo</p>
+                    <span>Moderado</span>
+                </div>
+            </div>
+
+
+            <div id="section-props-bottom">
+                <div class="div-props-bottom">
+                    <div>
+                        <img src="assets/nino_verde.png" alt="niños" class="props-bottom-img">
+                        <p class="p-verde">Bueno con niños</p>
+                    </div>
+                    <span class="s-verde">Excelente compañero para familia con niños</span>
+                    <!-- No recomendado para familias con niños pequeños -->
+                </div>
+                <div class="div-props-bottom">
+                    <div>
+                        <img src="assets/extranos_verde.png" alt="extraños" class="props-bottom-img">
+                        <p class="p-verde">Bueno con extraños</p>
+                    </div>
+                    <span class="s-verde">Amigable con personas nuevas</span>
+                    <!-- <span class="s-rojo">Puede tener problemas con extraños</span> -->
+                </div>
+                <div class="div-props-bottom">
+                    <div>
+                        <img src="assets/huella_verde.png" alt="mascotas" class="props-bottom-img">
+                        <p class="p-verde">Bueno con mascotas</p>
+                    </div>
+                    <span class="s-verde">Se lleva bien con otras mascotas</span>
+                    <!-- Puede tener problemas con otras mascotas -->
+                </div>
+            </div>
+        </section>
+
+
+        } @else {
+        <app-spinner></app-spinner>
+        }
+
+    </p-dialog>
+</div>

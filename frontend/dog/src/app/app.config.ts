@@ -7,7 +7,7 @@ import { provideRouter, withInMemoryScrolling, withRouterConfig } from '@angular
 
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { providePrimeNG } from 'primeng/config';
 import { DogMatchrLight } from './themes/dogmatchr-light';
 
@@ -15,9 +15,13 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes, withInMemoryScrolling(), withRouterConfig({
-      onSameUrlNavigation: 'reload'
-    })),
+    provideRouter(
+      routes,
+      withInMemoryScrolling(),
+      withRouterConfig({
+        onSameUrlNavigation: 'reload',
+      })
+    ),
     provideClientHydration(withEventReplay()),
     provideHttpClient(),
     providePrimeNG({

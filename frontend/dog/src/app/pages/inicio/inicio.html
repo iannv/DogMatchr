@@ -24,8 +24,8 @@
         </div>
     </section>
 
-
     <!-- Section cards -->
+    @if (!cargando) {
     <section id="sectionCards">
         <div>
             <a routerLink="razas">Descubrir más
@@ -36,11 +36,17 @@
         @if (arrRazasLimit) {
         <div class="cards-container">
             @for (raza of arrRazasLimit; track raza.id) {
-            <app-card-dog [dog]="raza"></app-card-dog>
+            <app-card-dog [dog]="raza" (dialog)="openDialogDetalleDog($event)"></app-card-dog>
             }
         </div>
-        }
 
+        @if (selectedRaza) {
+        <app-detalle-dog [nombre]="selectedRaza" [(visible)]="dialogVisible"></app-detalle-dog>
+        }
+        }
     </section>
 
+    } @else {
+    <app-spinner></app-spinner>
+    }
 </main>
