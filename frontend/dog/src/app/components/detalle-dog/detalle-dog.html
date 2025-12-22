@@ -15,6 +15,14 @@
 
             <section id="templateFooter">
                 <div class="templateFooter-div">
+
+                    <p>{{razaResponse?.dogapi?.bred_for}}</p>
+
+                    @for (t of temperament; track $index) {
+                    <p-chip label="{{t}}" class="chip-detalle" />
+                    }
+
+                    @if (ninja) {
                     <div class="div-vida-origen">
                         <div>
                             <img src="assets/pais.png" class="img-origin-life" alt="origin">
@@ -27,38 +35,44 @@
                         </div>
                     </div>
 
-                    <p>{{razaResponse?.dogapi?.bred_for}}</p>
+                    <div class="div-attr">
+                        <div class="img-wrapper-attr">
+                            <i class="pi pi-angle-right" style="font-size: 20px; color: var(--g400); opacity: 0.7;"></i>
+                            <p><strong>Pelaje: </strong> <span>{{coat_length}}</span></p>
+                        </div>
+                        <div class="img-wrapper-attr">
+                            <i class="pi pi-angle-right" style="font-size: 20px; color: var(--g400); opacity: 0.7;"></i>
+                            <p><strong>Altura: </strong><span>
+                                    {{
+                                    razaResponse?.dogapi?.height?.imperial
+                                    ? (+razaResponse?.dogapi?.height?.imperial!.split('-')[1].trim() * (2.54)|
+                                    number:'1.0')
+                                    : 'No disponible'
+                                    }}
+                                    cm</span></p>
+                        </div>
+                        <div class="img-wrapper-attr">
+                            <i class="pi pi-angle-right" style="font-size: 20px; color: var(--g400); opacity: 0.7;"></i>
+                            <p><strong>Peso: </strong><span>{{((ninja.max_weight_male!) / (2.205)).toFixed(1)}}
+                                    kg</span></p>
+                        </div>
+                    </div>
 
-                    @for (t of temperament; track $index) {
-                    <p-chip label="{{t}}" class="chip-detalle" />
-                    }
-
-                    @if (ninja) {
-                    <div class="img-wrapper">
-                        <img src="" class="img-origin-life" alt="coat length">
-                        <p>Pelaje: <span>Corto</span></p>
-                    </div>
-                    <div class="img-wrapper">
-                        <img src="" class="img-origin-life" alt="coat length">
-                        <p>Altura: <span>{{(ninja.max_height_male!) * (2.54)}} cm</span></p>
-                    </div>
-                    <div class="img-wrapper">
-                        <img src="" class="img-origin-life" alt="coat length">
-                        <p>Peso: <span>{{((ninja.max_weight_male!) / (2.205)).toFixed(1)}} kg</span></p>
-                    </div>
                     <!-- Información no disponible -->
                     } @else {
-                    <div class="img-wrapper">
-                        <img src="" class="img-origin-life" alt="coat length">
-                        <p>Pelaje: <span class="no-disponible">No disponible</span></p>
-                    </div>
-                    <div class="img-wrapper">
-                        <img src="" class="img-origin-life" alt="coat length">
-                        <p>Altura: <span class="no-disponible">No disponible</span></p>
-                    </div>
-                    <div class="img-wrapper">
-                        <img src="" class="img-origin-life" alt="coat length">
-                        <p>Peso: <span class="no-disponible">No disponible</span></p>
+                    <div class="div-attr">
+                        <div class="img-wrapper-attr">
+                            <i class="pi pi-angle-right" style="font-size: 20px; color: var(--g400); opacity: 0.7;"></i>
+                            <p><strong>Pelaje: </strong><span class="no-disponible">No disponible</span></p>
+                        </div>
+                        <div class="img-wrapper-attr">
+                            <i class="pi pi-angle-right" style="font-size: 20px; color: var(--g400); opacity: 0.7;"></i>
+                            <p><strong>Altura: </strong><span class="no-disponible">No disponible</span></p>
+                        </div>
+                        <div class="img-wrapper-attr">
+                            <i class="pi pi-angle-right" style="font-size: 20px; color: var(--g400); opacity: 0.7;"></i>
+                            <p><strong>Peso: </strong><span class="no-disponible">No disponible</span></p>
+                        </div>
                     </div>
                     }
 
@@ -80,32 +94,32 @@
                 <div class="div-props">
                     <img src="assets/energia.png" alt="">
                     <p>Energía</p>
-                    <span>Moderado</span>
+                    <span>{{energy}}</span>
                 </div>
                 <div class="div-props">
                     <img src="assets/protector.png" alt="">
                     <p>Protector</p>
-                    <span>Moderado</span>
+                    <span>{{protectiveness}}</span>
                 </div>
                 <div class="div-props">
                     <img src="assets/adiestramiento.png" alt="">
                     <p>Adiestramiento</p>
-                    <span>Moderado</span>
+                    <span>{{trainability}}</span>
                 </div>
                 <div class="div-props">
                     <img src="assets/jugueton.png" alt="">
                     <p>Juguetón</p>
-                    <span>Moderado</span>
+                    <span>{{playfulness}}</span>
                 </div>
                 <div class="div-props">
                     <img src="assets/ladrido.png" alt="">
                     <p>Ladrido</p>
-                    <span>Moderado</span>
+                    <span>{{barking}}</span>
                 </div>
                 <div class="div-props">
                     <img src="assets/aseo.png" alt="">
                     <p>Aseo</p>
-                    <span>Moderado</span>
+                    <span>{{grooming}}</span>
                 </div>
             </div>
 
@@ -114,25 +128,24 @@
                 <div class="div-props-bottom">
                     <div>
                         <img src="assets/nino_verde.png" alt="niños" class="props-bottom-img">
-                        <p class="p-verde">Bueno con niños</p>
+                        <p [ngClass]="estados.ninos">Bueno con niños</p>
                     </div>
-                    <span class="s-verde">Excelente compañero para familia con niños</span>
-                    <!-- No recomendado para familias con niños pequeños -->
+                    <span class="s-verde">{{good_with_children_prop}}</span>
                 </div>
                 <div class="div-props-bottom">
                     <div>
                         <img src="assets/extranos_verde.png" alt="extraños" class="props-bottom-img">
-                        <p class="p-verde">Bueno con extraños</p>
+                        <p [ngClass]="estados.extranos">Bueno con extraños</p>
                     </div>
-                    <span class="s-verde">Amigable con personas nuevas</span>
+                    <span class="s-verde">{{good_with_strangers}}</span>
                     <!-- <span class="s-rojo">Puede tener problemas con extraños</span> -->
                 </div>
                 <div class="div-props-bottom">
                     <div>
                         <img src="assets/huella_verde.png" alt="mascotas" class="props-bottom-img">
-                        <p class="p-verde">Bueno con mascotas</p>
+                        <p [ngClass]="estados.mascotas">Bueno con mascotas</p>
                     </div>
-                    <span class="s-verde">Se lleva bien con otras mascotas</span>
+                    <span class="s-verde">{{good_with_other_dogs}}</span>
                     <!-- Puede tener problemas con otras mascotas -->
                 </div>
             </div>

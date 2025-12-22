@@ -82,6 +82,10 @@
     align-items: center;
 }
 
+.templateFooter-div p:first-of-type {
+    color: var(--g400);
+}
+
 .templateFooter-div div:first-of-type {
     margin-right: 1.5rem;
 }
@@ -91,8 +95,30 @@
     font-size: 14px;
 }
 
+.div-vida-origen {
+    margin: 10px 0;
+}
+
 .img-origin-life {
     width: 16px;
+}
+
+
+
+.div-attr {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 0.5rem 0 1rem 0;
+}
+
+.div-attr strong {
+    color: var(--g500);
+}
+
+.img-wrapper-attr {
+    align-self: flex-start;
 }
 
 
@@ -124,13 +150,22 @@
     gap: 1rem;
 }
 
-.div-props-bottom .p-verde {
+.good {
     color: var(--v400);
     font-weight: 500;
 }
 
 .div-props-bottom .s-verde {
     color: var(--v300);
+}
+
+.div-props-bottom .p-rojo {
+    color: var(--400);
+    font-weight: 500;
+}
+
+.div-props-bottom .s-rojo {
+    color: var(--r300);
 }
 
 .props-bottom-img {
