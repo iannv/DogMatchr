@@ -61,9 +61,9 @@ export class DetalleDog implements OnChanges {
         this.buenoConPersonas();
         this.buenoConMascotas();
 
-        this.estados.ninos = this.verificarEstado(this.ninja?.good_with_children!);
-        this.estados.extranos = this.verificarEstado(this.ninja?.good_with_strangers!);
-        this.estados.mascotas = this.verificarEstado(this.ninja?.good_with_other_dogs!);
+        this.estados.ninos = this.getEstado(this.ninja?.good_with_children!);
+        this.estados.extranos = this.getEstado(this.ninja?.good_with_strangers!);
+        this.estados.mascotas = this.getEstado(this.ninja?.good_with_other_dogs!);
 
         this.images = [];
         if (this.dogapi.image?.url) {
@@ -191,16 +191,40 @@ export class DetalleDog implements OnChanges {
     return this.good_with_other_dogs;
   }
 
-  // Estados
+  // Estados - Manejo de colores
   estados: {
     ninos?: EstadoProps;
     extranos?: EstadoProps;
     mascotas?: EstadoProps;
   } = {};
 
-  private verificarEstado(valor: number): EstadoProps {
+  private getEstado(valor: number): EstadoProps {
     if (valor < 3) return 'bad';
     if (valor === 3) return 'warning';
     return 'good';
+  }
+
+  getTitleClass(valor?: number) {
+    const estado = this.getEstado(valor!);
+    return estado ? `title-${estado}` : '';
+  }
+
+  getSubtitleClass(valor?: number) {
+    const estado = this.getEstado(valor!);
+    return estado ? `subtitle-${estado}` : '';
+  }
+
+  getIconClass(valor?: number) {
+    return this.getEstado(valor ?? 0);
+  }
+
+  getBorderClass(valor?: number) {
+    const estado = this.getEstado(valor!);
+    return estado ? `border-${estado}` : '';
+  }
+
+  getBackgroundClass(valor?: number) {
+    const estado = this.getEstado(valor!);
+    return estado ? `background-${estado}` : '';
   }
 }

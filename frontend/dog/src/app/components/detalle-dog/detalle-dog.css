@@ -23,11 +23,7 @@
 
 .chip-detalle {
     background-color: var(--n200) !important;
-    color: var(--n800) !important;
-}
-
-.section-props {
-    /* margin-top: 20px; */
+    color: var(--n700) !important;
 }
 
 
@@ -138,9 +134,7 @@
 .div-props-bottom {
     width: 100%;
     height: 140px;
-    background-color: var(--v50);
     border-radius: 8px;
-    border: 2px solid var(--v100);
     padding: 1rem;
 }
 
@@ -148,24 +142,6 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-}
-
-.good {
-    color: var(--v400);
-    font-weight: 500;
-}
-
-.div-props-bottom .s-verde {
-    color: var(--v300);
-}
-
-.div-props-bottom .p-rojo {
-    color: var(--400);
-    font-weight: 500;
-}
-
-.div-props-bottom .s-rojo {
-    color: var(--r300);
 }
 
 .props-bottom-img {
@@ -219,3 +195,63 @@
         margin-right: 20px !important;
     }
 }
+
+
+
+/* ///////////////////////////////////////////////////////////////////// */
+/* ///////////////////////////////////////////////////////////////////// */
+/************ ESTADOS *************/
+/* TITULO */
+.title-bad {
+    color: var(--r400);
+}
+
+.title-warning {
+    color: var(--n600);
+}
+
+.title-good {
+    color: var(--v400);
+}
+
+/* SUBTITULO */
+.subtitle-bad {
+    color: var(--r300);
+}
+
+.subtitle-warning {
+    color: var(--n400);
+}
+
+.subtitle-good {
+    color: var(--v300);
+}
+
+/* BORDER */
+.border-bad {
+    border: 2px solid var(--r100);
+}
+
+.border-warning {
+    border: 2px solid var(--n300);
+}
+
+.border-good {
+    border: 2px solid var(--v100);
+}
+
+/* BACKGROUND */
+.background-bad {
+    background-color: var(--r50);
+}
+
+.background-warning {
+    background-color: var(--n50);
+}
+
+.background-good {
+    background-color: var(--v50);
+}
+
+/* ICON */
+
