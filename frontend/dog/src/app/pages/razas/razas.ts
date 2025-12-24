@@ -3,12 +3,13 @@ import { PaginatorModule, PaginatorState } from 'primeng/paginator';
 import { RazaService } from '../../services/raza-service';
 import { Dogapi, RazaResponse } from '../../models/RazaModel';
 import { CardDog } from '../../components/card-dog/card-dog';
+import { Chip } from 'primeng/chip';
 import { Spinner } from '../../components/spinner/spinner';
 import { DetalleDog } from '../../components/detalle-dog/detalle-dog';
 
 @Component({
   selector: 'app-razas',
-  imports: [PaginatorModule, CardDog, Spinner, DetalleDog],
+  imports: [PaginatorModule, CardDog, Spinner, Chip, DetalleDog],
   templateUrl: './razas.html',
   styleUrl: './razas.css',
 })
@@ -20,6 +21,7 @@ export class Razas implements OnInit {
   first: number = 0;
   rows: number = 20;
   arrAllRazas: Dogapi[] = [];
+  chipsFilters: string[] = ['Friendly', 'Affectionate', 'Loyal', 'Intelligent', 'Trainable', 'Energetic', 'Calm', 'Gentle', 'Protective', 'Playful']
 
   constructor(private razaService: RazaService) {}
 
@@ -31,6 +33,11 @@ export class Razas implements OnInit {
     this.cargando = true;
     this.razaService.getRazas().subscribe((respuesta) => {
       this.arrAllRazas = respuesta;
+      
+      this.chipsFilters.forEach(chip => {
+        return chip;
+      });
+
       this.cargando = false;
     });
   }

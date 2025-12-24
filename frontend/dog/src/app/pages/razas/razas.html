@@ -9,10 +9,16 @@
                 </p>
                 <p>
                     Cada página muestra 20 perfiles con información detallada.
+                    Filtrá por características.
                 </p>
             </div>
 
             @if (!cargando) {
+
+            @for (t of chipsFilters; track $index) {
+            <p-chip id="p-chip" label="{{t}}" class="chip-detalle" />
+            }
+
             <div class="cards-container">
                 @for (raza of razasPaginadas(); track $index) {
                 <app-card-dog [dog]="raza" (dialog)="openDialogDetalleDog($event)"></app-card-dog>
@@ -31,6 +37,5 @@
         @if (selectedRaza) {
         <app-detalle-dog [nombre]="selectedRaza" [(visible)]="dialogVisible"></app-detalle-dog>
         }
-
     </section>
 </main>
