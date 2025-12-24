@@ -64,10 +64,12 @@
     display: flex;
     flex-direction: column;
     margin: 5px 0;
+    color: var(--g400);
 }
 
 .div-props span {
     font-size: 16px;
+    font-weight: 500;
 }
 
 
