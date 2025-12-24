@@ -1,4 +1,4 @@
-export type EstadoProps = 'bad' | 'warning' | 'good';
+export type EstadoProps = 'bad' | 'warning' | 'good' | 'neutro';
 
 export type EstadoElements = {
   background: string;

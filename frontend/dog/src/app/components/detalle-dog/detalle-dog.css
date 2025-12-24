@@ -214,6 +214,12 @@
     color: var(--v400);
 }
 
+.title-neutro {
+    color: var(--g500);
+}
+
+
+
 /* SUBTITULO */
 .subtitle-bad {
     color: var(--r300);
@@ -226,6 +232,11 @@
 .subtitle-good {
     color: var(--v300);
 }
+
+.subtitle-neutro {
+    color: var(--g400);
+}
+
 
 /* BORDER */
 .border-bad {
@@ -240,6 +251,8 @@
     border: 2px solid var(--v100);
 }
 
+
+
 /* BACKGROUND */
 .background-bad {
     background-color: var(--r50);
@@ -253,5 +266,7 @@
     background-color: var(--v50);
 }
 
-/* ICON */
+.background-neutro {
+    background-color: var(--g100);
+}
 

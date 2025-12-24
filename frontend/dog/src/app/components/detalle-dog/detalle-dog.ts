@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { Dialog } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { Dogapi, Ninja, RazaResponse } from '../../models/RazaModel';
@@ -15,7 +23,7 @@ import { RequiredValidator } from '@angular/forms';
   templateUrl: './detalle-dog.html',
   styleUrl: './detalle-dog.css',
 })
-export class DetalleDog implements OnChanges {
+export class DetalleDog implements OnChanges, OnDestroy {
   @Input() razaResponse?: RazaResponse;
   @Input() nombre!: string;
   @Input() visible: boolean = false;
@@ -37,6 +45,8 @@ export class DetalleDog implements OnChanges {
       this.verDetalleDog();
     }
   }
+
+  ngOnDestroy(): void {}
 
   images: { itemImageSrc: string }[] = [];
   verDetalleDog() {
@@ -84,9 +94,6 @@ export class DetalleDog implements OnChanges {
 
   closeDialog() {
     this.visibleChange.emit(false);
-    this.razaResponse = undefined;
-    this.dogapi = undefined;
-    this.ninja = undefined;
   }
 
   // Propiedades
@@ -199,9 +206,10 @@ export class DetalleDog implements OnChanges {
   } = {};
 
   private getEstado(valor: number): EstadoProps {
-    if (valor < 3) return 'bad';
+    if (valor > 0 && valor < 3) return 'bad';
     if (valor === 3) return 'warning';
-    return 'good';
+    if (valor > 3) return 'good';
+    return 'neutro';
   }
 
   getTitleClass(valor?: number) {
