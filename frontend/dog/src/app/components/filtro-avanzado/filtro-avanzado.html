@@ -1,0 +1,21 @@
+<aside class="card flex justify-center">
+    <h3>Filtros</h3>
+    <hr>
+
+    <label for="vivienda">Tamaño de vivienda</label>
+    <p-select [options]="viviendas" [(ngModel)]="selectedVivienda" optionLabel="label"
+        placeholder="Seleccioná la vivienda" class="w-full md:w-56" />
+
+    <label for="vivienda">Tiempo libre diario</label>
+    <p-select [options]="tiempoLibre" [(ngModel)]="selectedTiempoLibre" optionLabel="label"
+        placeholder="Seleccioná tu tiempo libre" class="w-full md:w-56" />
+
+    <label for="vivienda">Nivel de actividad</label>
+    <p-select [options]="actividad" [(ngModel)]="selectedActividad" optionLabel="label"
+        placeholder="Seleccioná el nivel de actividad" class="w-full md:w-56" />
+
+    <label for="vivienda">Importancia del adiestramiento</label>
+    <p-select [options]="adiestramiento" [(ngModel)]="selectedAdiestramiento" optionLabel="label"
+        placeholder="Seleccioná el nivel de actividad" class="w-full md:w-56" />
+
+</aside>

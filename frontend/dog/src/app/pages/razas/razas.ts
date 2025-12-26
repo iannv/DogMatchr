@@ -6,10 +6,11 @@ import { CardDog } from '../../components/card-dog/card-dog';
 import { Chip } from 'primeng/chip';
 import { Spinner } from '../../components/spinner/spinner';
 import { DetalleDog } from '../../components/detalle-dog/detalle-dog';
+import { FiltroAvanzado } from "../../components/filtro-avanzado/filtro-avanzado";
 
 @Component({
   selector: 'app-razas',
-  imports: [PaginatorModule, CardDog, Spinner, Chip, DetalleDog],
+  imports: [PaginatorModule, CardDog, Spinner, Chip, DetalleDog, FiltroAvanzado],
   templateUrl: './razas.html',
   styleUrl: './razas.css',
 })
