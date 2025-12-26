@@ -1,3 +1,10 @@
+main {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* justify-content: space-between; */
+}
+
 ::ng-deep #p-chip {
     cursor: pointer;
     background-color: var(--n600) !important;
@@ -40,6 +47,10 @@
 ::ng-deep p-paginator {
     width: 100vw;
     background-color: transparent !important;
+}
+
+.cards-container {
+    width: 50vw;
 }
 
 #div-title {
