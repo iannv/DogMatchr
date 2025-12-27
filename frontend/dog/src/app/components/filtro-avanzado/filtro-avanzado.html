@@ -1,21 +1,42 @@
 <aside class="card flex justify-center">
-    <h3>Filtros</h3>
+    <div id="div-title-filter">
+        <i class="pi pi-filter-slash" style="color: var(--g400); margin-right: 5px;"></i>
+        <h3>Filtrar la busqueda</h3>
+    </div>
+
     <hr>
 
     <label for="vivienda">Tamaño de vivienda</label>
-    <p-select [options]="viviendas" [(ngModel)]="selectedVivienda" optionLabel="label"
-        placeholder="Seleccioná la vivienda" class="w-full md:w-56" />
+    <p-select [options]="viviendas" [(ngModel)]="selectedVivienda" optionLabel="label" placeholder="Seleccioná"
+        class="w-full md:w-56" />
 
-    <label for="vivienda">Tiempo libre diario</label>
-    <p-select [options]="tiempoLibre" [(ngModel)]="selectedTiempoLibre" optionLabel="label"
-        placeholder="Seleccioná tu tiempo libre" class="w-full md:w-56" />
+    <label for="tiempoLibre">Tiempo libre diario</label>
+    <p-select [options]="tiempoLibre" [(ngModel)]="selectedTiempoLibre" optionLabel="label" placeholder="Seleccioná"
+        class="w-full md:w-56" />
 
-    <label for="vivienda">Nivel de actividad</label>
-    <p-select [options]="actividad" [(ngModel)]="selectedActividad" optionLabel="label"
-        placeholder="Seleccioná el nivel de actividad" class="w-full md:w-56" />
+    <label for="actividad">Nivel de actividad</label>
+    <p-select [options]="actividad" [(ngModel)]="selectedActividad" optionLabel="label" placeholder="Seleccioná"
+        class="w-full md:w-56" />
 
-    <label for="vivienda">Importancia del adiestramiento</label>
+    <label for="adiestramiento">Importancia del adiestramiento</label>
     <p-select [options]="adiestramiento" [(ngModel)]="selectedAdiestramiento" optionLabel="label"
-        placeholder="Seleccioná el nivel de actividad" class="w-full md:w-56" />
+        placeholder="Seleccioná" class="w-full md:w-56" />
 
+    <label for="ruido">Tolerancia al ruido</label>
+    <p-select [options]="ruido" [(ngModel)]="selectedRuido" optionLabel="label" placeholder="Seleccioná"
+        class="w-full md:w-56" />
+
+    <label for="aseo">Tiempo para el aseo</label>
+    <p-select [options]="aseo" [(ngModel)]="selectedAseo" optionLabel="label" placeholder="Seleccioná"
+        class="w-full md:w-56" />
+
+    <label for="convive">Convive con</label>
+    <p-select [options]="convive" [(ngModel)]="selectedConvive" optionLabel="label" placeholder="Seleccioná"
+        class="w-full md:w-56" />
+
+    <label for="personalidad">Personalidad que te gusta más</label>
+    <div *ngFor="let p of personalidad" class="flex items-center">
+        <p-checkbox [inputId]="p.value" name="group" [value]="p" [(ngModel)]="selectedPersonalidad" />
+        <label [for]="p.value" class="ml-2" id="labelPersonalidad"> {{ p.label }} </label>
+    </div>
 </aside>

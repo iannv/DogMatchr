@@ -1,6 +1,8 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Select } from 'primeng/select';
+import { CheckboxModule } from 'primeng/checkbox';
 
 interface FiltroOption {
   label: string;
@@ -9,7 +11,7 @@ interface FiltroOption {
 
 @Component({
   selector: 'app-filtro-avanzado',
-  imports: [FormsModule, Select],
+  imports: [FormsModule, Select, CommonModule, CheckboxModule],
   templateUrl: './filtro-avanzado.html',
   styleUrl: './filtro-avanzado.css',
 })
@@ -25,6 +27,18 @@ export class FiltroAvanzado implements OnInit {
 
   adiestramiento: FiltroOption[] | undefined;
   selectedAdiestramiento: FiltroOption | undefined;
+
+  ruido: FiltroOption[] | undefined;
+  selectedRuido: FiltroOption | undefined;
+
+  aseo: FiltroOption[] | undefined;
+  selectedAseo: FiltroOption | undefined;
+
+  convive: FiltroOption[] | undefined;
+  selectedConvive: FiltroOption | undefined;
+
+  personalidad: FiltroOption[] = [];
+  selectedPersonalidad: FiltroOption[] = [];
 
   ngOnInit() {
     this.viviendas = [
@@ -53,5 +67,32 @@ export class FiltroAvanzado implements OnInit {
       { label: 'Importante', value: 'importante' },
       { label: 'Muy importante', value: 'muy_importante' },
     ];
+
+    this.ruido = [
+      { label: 'Baja', value: 'baja' },
+      { label: 'Moderada', value: 'moderada' },
+      { label: 'Alta', value: 'alta' },
+    ];
+
+    this.aseo = [
+      { label: 'Poco', value: 'poco' },
+      { label: 'Moderado', value: 'moderado' },
+      { label: 'Mucho', value: 'mucho' },
+    ];
+
+    this.convive = [
+      { label: 'Niños', value: 'niños' },
+      { label: 'Otras mascotas', value: 'mascotas' },
+      { label: 'Desconocidos', value: 'desconocidos' },
+    ];
+
+    this.personalidad = [
+      { label: 'Protector', value: 'protector' },
+      { label: 'Tranquilo', value: 'tranquilo' },
+      { label: 'Cariñoso y familiar', value: 'cariñoso_familiar' },
+      { label: 'Jugueton y divertido', value: 'jugueton_divertido' },
+      { label: 'Inteligente', value: 'inteligente' },
+      { label: 'Independiente', value: 'independiente' },
+    ];  
   }
 }
