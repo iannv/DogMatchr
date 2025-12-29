@@ -35,7 +35,7 @@
 
         @if (arrRazasLimit) {
         <div class="cards-container">
-            @for (raza of arrRazasLimit; track raza.id) {
+            @for (raza of arrRazasLimit; track raza.dogapi?.id) {
             <app-card-dog [dog]="raza" (dialog)="openDialogDetalleDog($event)"></app-card-dog>
             }
         </div>

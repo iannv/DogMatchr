@@ -23,7 +23,7 @@
 
             <div class="cards-container">
                 @for (raza of razasPaginadas(); track $index) {
-                <app-card-dog [dog]="raza.dogapi!" (dialog)="openDialogDetalleDog($event)"></app-card-dog>
+                <app-card-dog [dog]="raza" (dialog)="openDialogDetalleDog($event.dogapi!)"></app-card-dog>
                 }
             </div>
             } @else {
