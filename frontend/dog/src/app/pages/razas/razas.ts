@@ -3,12 +3,15 @@ import { PaginatorModule, PaginatorState } from 'primeng/paginator';
 import { RazaService } from '../../services/raza-service';
 import { Dogapi, RazaResponse } from '../../models/RazaModel';
 import { CardDog } from '../../components/card-dog/card-dog';
+import { Chip } from 'primeng/chip';
 import { Spinner } from '../../components/spinner/spinner';
 import { DetalleDog } from '../../components/detalle-dog/detalle-dog';
+import { FiltroAvanzado } from '../../components/filtro-avanzado/filtro-avanzado';
+import { ActividadValue } from '../../types/EstadoProps';
 
 @Component({
   selector: 'app-razas',
-  imports: [PaginatorModule, CardDog, Spinner, DetalleDog],
+  imports: [PaginatorModule, CardDog, Spinner, Chip, DetalleDog, FiltroAvanzado],
   templateUrl: './razas.html',
   styleUrl: './razas.css',
 })
@@ -19,7 +22,22 @@ export class Razas implements OnInit {
   cargando: boolean = false;
   first: number = 0;
   rows: number = 20;
-  arrAllRazas: Dogapi[] = [];
+
+  arrAllRazas: RazaResponse[] = [];
+  razasFiltradas: RazaResponse[] = [];
+
+  chipsFilters: string[] = [
+    'Friendly',
+    'Affectionate',
+    'Loyal',
+    'Intelligent',
+    'Trainable',
+    'Energetic',
+    'Calm',
+    'Gentle',
+    'Protective',
+    'Playful',
+  ];
 
   constructor(private razaService: RazaService) {}
 
@@ -29,11 +47,32 @@ export class Razas implements OnInit {
 
   public getAllRazas() {
     this.cargando = true;
-    this.razaService.getRazas().subscribe((respuesta) => {
-      this.arrAllRazas = respuesta;
+
+    this.razaService.getRazasDogapi().subscribe((razas) => {
+      this.arrAllRazas = razas.map((dog) => ({
+        dogapi: dog,
+        ninja: undefined, // se carga después si hace falta
+      }));
+      this.chipsFilters.forEach((chip) => {
+        return chip;
+      });
+
+      this.razasFiltradas = [...this.arrAllRazas];
       this.cargando = false;
     });
   }
+
+  // this.razaService.getRazas().subscribe((respuesta) => {
+  //   this.arrAllRazas = respuesta;
+  //   // this.arrAllRazas = razas.map((dog) => ({
+  //   //   dogapi: dog,
+  //   //   ninja: [],
+  //   // }));
+
+  //   this.razasFiltradas = [...respuesta];
+
+  //   this.cargando = false;
+  // });
 
   onPageChange(event: PaginatorState) {
     this.first = event.first ?? 0;
@@ -42,12 +81,55 @@ export class Razas implements OnInit {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  razasPaginadas(): Dogapi[] {
-    return this.arrAllRazas.slice(this.first, this.first + this.rows);
+  razasPaginadas(): RazaResponse[] {
+    //:Dogapi[]
+    // .arrAllRazas
+    return this.razasFiltradas.slice(this.first, this.first + this.rows);
   }
 
   openDialogDetalleDog(dog: Dogapi) {
     this.selectedRaza = dog.name!;
     this.dialogVisible = true;
+  }
+
+  // /////////////////////////////////////////////////////////////////////////////////////
+  // /////////////////////////////////////////////////////////////////////////////////////
+  // Filtros avanzados
+  aplicarFiltros() {
+    if (!this.actividadSeleccionada) {
+      this.razasFiltradas = [...this.arrAllRazas];
+      return;
+    }
+    this.razasFiltradas = this.arrAllRazas.filter((raza) =>
+      raza.ninja?.some((n) => n.energy === this.actividadSeleccionada)
+    );
+  }
+
+  actividadSeleccionada: ActividadValue | null = null;
+  filtrarXActividad(valor: ActividadValue | null) {
+    if (!valor) {
+      this.razasFiltradas = [...this.arrAllRazas];
+      this.first = 0;
+      return;
+    }
+
+    this.razasFiltradas = this.arrAllRazas.filter((raza) =>
+      raza.ninja?.some((ninja) => {
+        const energy = ninja.energy;
+        if (energy == null) return false;
+
+        switch (valor) {
+          case 1:
+            return energy < 3;
+          case 2:
+            return energy === 3;
+          case 3:
+            return energy > 3;
+          default:
+            return false;
+        }
+      })
+    );
+    this.first = 0;
   }
 }

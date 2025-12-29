@@ -1,7 +1,7 @@
 export type DogapiResponse = Dogapi[];
 
 export interface RazaResponse {
-  dogapi: Dogapi;
+  dogapi?: Dogapi;
   ninja?: Ninja[];
 }
 

@@ -9,7 +9,7 @@ import { RazaService } from '../../services/raza-service';
 import { Dogapi, RazaResponse } from '../../models/RazaModel';
 import { RouterLink } from '@angular/router';
 import { Spinner } from '../../components/spinner/spinner';
-import { DetalleDog } from "../../components/detalle-dog/detalle-dog";
+import { DetalleDog } from '../../components/detalle-dog/detalle-dog';
 
 @Component({
   selector: 'app-inicio',
@@ -22,8 +22,8 @@ import { DetalleDog } from "../../components/detalle-dog/detalle-dog";
     CardDog,
     RouterLink,
     Spinner,
-    DetalleDog
-],
+    DetalleDog,
+  ],
   templateUrl: './inicio.html',
   styleUrl: './inicio.css',
 })
@@ -34,7 +34,7 @@ export class Inicio implements OnInit, OnChanges {
   dialogVisible = false;
 
   cargando: boolean = false;
-  arrRazasLimit: Dogapi[] = [];
+  arrRazasLimit: RazaResponse[] = [];
 
   ngOnInit() {
     this.getRazasLimit(20);
@@ -46,14 +46,24 @@ export class Inicio implements OnInit, OnChanges {
 
   public getRazasLimit(limit: number) {
     this.cargando = true;
-    this.razaService.getRazas().subscribe((respuesta) => {
-      this.arrRazasLimit = respuesta.slice(0, limit);
+    this.razaService.getRazasDogapi().subscribe((razas) => {
+      this.arrRazasLimit = razas.slice(0, limit).map((dog) => ({
+        dogapi: dog,
+        ninja: undefined,
+      }));
+
       this.cargando = false;
     });
   }
+    // this.razaService.getRazas().subscribe((respuesta) => {
+    //   this.arrRazasLimit = respuesta.slice(0, limit);
+    //   console.log('RESPUESTA INICIO:', respuesta[0]);
+    //   this.cargando = false;
+    // });
+  
 
-  openDialogDetalleDog(dog: Dogapi) {
-    this.selectedRaza = dog.name!;
+  openDialogDetalleDog(dog: RazaResponse) {
+    this.selectedRaza = dog.dogapi?.name!;
     this.dialogVisible = true;
   }
 }

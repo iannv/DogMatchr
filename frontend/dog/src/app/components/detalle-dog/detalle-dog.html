@@ -7,7 +7,7 @@
 
         <section id="sectionTop">
             <p-galleria [value]="images" [numVisible]="5" [circular]="true" [showItemNavigators]="true"
-                [showThumbnails]="false" [containerStyle]="{ 'max-width': '530px' }">
+                [showThumbnails]="false" [containerStyle]="{ 'max-width': '520px' }">
                 <ng-template pTemplate="item" let-item id="templateGallery">
                     <img [src]="item.itemImageSrc" style="width: 100%; display: block;" />
                 </ng-template>
@@ -15,14 +15,6 @@
 
             <section id="templateFooter">
                 <div class="templateFooter-div">
-                    <div class="img-wrapper">
-                        <img src="assets/reloj.png" class="img-origin-life" alt="life span">
-                        <p>{{razaResponse?.dogapi?.life_span}}</p>
-                    </div>
-                    <div>
-                        <img src="assets/pais.png" class="img-origin-life" alt="origin">
-                        @if (razaResponse?.dogapi?.origin) { <p>{{razaResponse?.dogapi?.origin}}</p> } @else {<p>-</p>}
-                    </div>
 
                     <p>{{razaResponse?.dogapi?.bred_for}}</p>
 
@@ -30,90 +22,124 @@
                     <p-chip label="{{t}}" class="chip-detalle" />
                     }
 
-                    <div class="img-wrapper">
-                        <img src="" class="img-origin-life" alt="coat length">
-                        <p>Pelaje: <span></span></p>
+                    @if (ninja) {
+                    <div class="div-vida-origen">
+                        <div>
+                            <img src="assets/pais.png" class="img-origin-life" alt="origin">
+                            @if (razaResponse?.dogapi?.origin) { <p>{{razaResponse?.dogapi?.origin}}</p> } @else {<p>-
+                            </p>}
+                        </div>
+                        <div class="img-wrapper">
+                            <img src="assets/reloj.png" class="img-origin-life" alt="life span">
+                            <p>{{razaResponse?.dogapi?.life_span}}</p>
+                        </div>
                     </div>
-                    <div class="img-wrapper">
-                        <img src="" class="img-origin-life" alt="coat length">
-                        <p>Altura: <span></span></p>
+
+                    <div class="div-attr">
+                        <!-- <div class="img-wrapper-attr">
+                            <i class="pi pi-angle-right" style="font-size: 20px; color: var(--g400); opacity: 0.7;"></i>
+                            <p><strong>Pelaje: </strong> <span>{{coat_length}}</span></p>
+                        </div> -->
+                        <div class="img-wrapper-attr">
+                            <i class="pi pi-angle-right" style="font-size: 20px; color: var(--g400); opacity: 0.7;"></i>
+                            <p><strong>Altura: </strong><span>
+                                    {{
+                                    razaResponse?.dogapi?.height?.imperial
+                                    ? (+razaResponse?.dogapi?.height?.imperial!.split('-')[1].trim() * (2.54)|
+                                    number:'1.0')
+                                    : 'No disponible'
+                                    }}
+                                    cm</span></p>
+                        </div>
+                        <div class="img-wrapper-attr">
+                            <i class="pi pi-angle-right" style="font-size: 20px; color: var(--g400); opacity: 0.7;"></i>
+                            <p><strong>Peso: </strong><span>{{((ninja.max_weight_male!) / (2.205)).toFixed(1)}}
+                                    kg</span></p>
+                        </div>
                     </div>
-                    <div class="img-wrapper">
-                        <img src="" class="img-origin-life" alt="coat length">
-                        <p>Peso: <span></span></p>
+
+                    <!-- Información no disponible -->
+                    } @else {
+                    <div class="div-attr">
+                        <!-- <div class="img-wrapper-attr">
+                            <i class="pi pi-angle-right" style="font-size: 20px; color: var(--g400); opacity: 0.7;"></i>
+                            <p><strong>Pelaje: </strong><span class="no-disponible">No disponible</span></p>
+                        </div> -->
+                        <div class="img-wrapper-attr">
+                            <i class="pi pi-angle-right" style="font-size: 20px; color: var(--g400); opacity: 0.7;"></i>
+                            <p><strong>Altura: </strong><span class="no-disponible">No disponible</span></p>
+                        </div>
+                        <div class="img-wrapper-attr">
+                            <i class="pi pi-angle-right" style="font-size: 20px; color: var(--g400); opacity: 0.7;"></i>
+                            <p><strong>Peso: </strong><span class="no-disponible">No disponible</span></p>
+                        </div>
                     </div>
+                    }
+
                 </div>
             </section>
-
         </section>
-        <!-- 
-            Muda de pelo
-            Aseo (grooming)
-            Babeo
-            Largo del pelaje
 
-            Altura max y min
-            Peso max y min
-        -->
+
         <section class="section-props">
             <div id="section-div-props">
                 <div class="div-props">
                     <img src="assets/energia.png" alt="">
                     <p>Energía</p>
-                    <span>Moderado</span>
+                    <span>{{energy}}</span>
                 </div>
                 <div class="div-props">
                     <img src="assets/protector.png" alt="">
                     <p>Protector</p>
-                    <span>Moderado</span>
+                    <span>{{protectiveness}}</span>
                 </div>
                 <div class="div-props">
                     <img src="assets/adiestramiento.png" alt="">
                     <p>Adiestramiento</p>
-                    <span>Moderado</span>
+                    <span>{{trainability}}</span>
                 </div>
                 <div class="div-props">
                     <img src="assets/jugueton.png" alt="">
                     <p>Juguetón</p>
-                    <span>Moderado</span>
+                    <span>{{playfulness}}</span>
                 </div>
                 <div class="div-props">
                     <img src="assets/ladrido.png" alt="">
                     <p>Ladrido</p>
-                    <span>Moderado</span>
+                    <span>{{barking}}</span>
                 </div>
                 <div class="div-props">
                     <img src="assets/aseo.png" alt="">
                     <p>Aseo</p>
-                    <span>Moderado</span>
+                    <span>{{grooming}}</span>
                 </div>
             </div>
 
 
             <div id="section-props-bottom">
-                <div class="div-props-bottom">
+                <div class="div-props-bottom"
+                    [ngClass]="[getBorderClass(ninja?.good_with_children), getBackgroundClass(ninja?.good_with_children)]">
                     <div>
-                        <img src="assets/nino_verde.png" alt="niños" class="props-bottom-img">
-                        <p class="p-verde">Bueno con niños</p>
+                        <img [src]="`assets/nino-${getIconClass(ninja?.good_with_children)}.png`" alt="niños" class="props-bottom-img">
+                        <p [ngClass]="getTitleClass(ninja?.good_with_children)">Niños</p>
                     </div>
-                    <span class="s-verde">Excelente compañero para familia con niños</span>
-                    <!-- No recomendado para familias con niños pequeños -->
+                    <span [ngClass]="getSubtitleClass(ninja?.good_with_children)">{{good_with_children_prop}}</span>
                 </div>
-                <div class="div-props-bottom">
+                <div class="div-props-bottom"
+                    [ngClass]="[getBorderClass(ninja?.good_with_strangers!), getBackgroundClass(ninja?.good_with_strangers!)]">
                     <div>
-                        <img src="assets/extranos_verde.png" alt="extraños" class="props-bottom-img">
-                        <p class="p-verde">Bueno con extraños</p>
+                        <img [src]="`assets/extranos-${getIconClass(ninja?.good_with_strangers)}.png`" alt="desconocidos" class="props-bottom-img">
+                        <p [ngClass]="getTitleClass(ninja?.good_with_strangers!)">Desconocidos</p>
                     </div>
-                    <span class="s-verde">Amigable con personas nuevas</span>
-                    <!-- <span class="s-rojo">Puede tener problemas con extraños</span> -->
+                    <span [ngClass]="getSubtitleClass(ninja?.good_with_strangers!)">{{good_with_strangers}}</span>
                 </div>
-                <div class="div-props-bottom">
+                <div class="div-props-bottom"
+                    [ngClass]="[getBorderClass(ninja?.good_with_other_dogs), getBackgroundClass(ninja?.good_with_other_dogs)]">
                     <div>
-                        <img src="assets/huella_verde.png" alt="mascotas" class="props-bottom-img">
-                        <p class="p-verde">Bueno con mascotas</p>
+                        <img [src]="`assets/huella-${getIconClass(ninja?.good_with_other_dogs)}.png`" alt="mascotas" class="props-bottom-img">
+                        <p [ngClass]="getTitleClass(ninja?.good_with_other_dogs)">Mascotas</p>
                     </div>
-                    <span class="s-verde">Se lleva bien con otras mascotas</span>
-                    <!-- Puede tener problemas con otras mascotas -->
+                    <span [ngClass]="getSubtitleClass(ninja?.good_with_other_dogs)">{{good_with_other_dogs}}</span>
                 </div>
             </div>
         </section>

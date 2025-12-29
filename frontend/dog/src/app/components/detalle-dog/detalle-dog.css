@@ -2,9 +2,15 @@
     width: 70vw !important;
 }
 
+::ng-deep .p-dialog-header {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
 ::ng-deep .p-galleria {
     border: none !important;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin-bottom: 20px !important;
 }
 
 ::ng-deep #sectionTop .p-galleria {
@@ -17,8 +23,9 @@
 
 .chip-detalle {
     background-color: var(--n200) !important;
-    color: var(--n800) !important;
+    color: var(--n700) !important;
 }
+
 
 #section-div-props,
 #section-props-bottom {
@@ -57,10 +64,12 @@
     display: flex;
     flex-direction: column;
     margin: 5px 0;
+    color: var(--g400);
 }
 
 .div-props span {
     font-size: 16px;
+    font-weight: 500;
 }
 
 
@@ -71,19 +80,45 @@
     align-items: center;
 }
 
-.templateFooter-div div:first-of-type {
-    margin-bottom: 10px;
+.templateFooter-div p:first-of-type {
+    color: var(--g400);
 }
 
+.templateFooter-div div:first-of-type {
+    margin-right: 1.5rem;
+}
 
 .templateFooter-div div p {
-    margin: 0 0 0px 10px;
+    margin: 0 0 0px 6px;
     font-size: 14px;
+}
+
+.div-vida-origen {
+    margin: 10px 0;
 }
 
 .img-origin-life {
     width: 16px;
 }
+
+
+
+.div-attr {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 0.5rem 0 1rem 0;
+}
+
+.div-attr strong {
+    color: var(--g500);
+}
+
+.img-wrapper-attr {
+    align-self: flex-start;
+}
+
 
 
 
@@ -101,9 +136,7 @@
 .div-props-bottom {
     width: 100%;
     height: 140px;
-    background-color: var(--v50);
     border-radius: 8px;
-    border: 2px solid var(--v100);
     padding: 1rem;
 }
 
@@ -111,15 +144,6 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-}
-
-.div-props-bottom .p-verde {
-    color: var(--v400);
-    font-weight: 500;
-}
-
-.div-props-bottom .s-verde {
-    color: var(--v300);
 }
 
 .props-bottom-img {
@@ -132,7 +156,12 @@
 @media (min-width: 576px) {
     .div-props {
         width: 48%;
+        height: 120px;
         justify-content: space-between;
+    }
+
+    .div-props-bottom {
+        height: 120px;
     }
 }
 
@@ -153,6 +182,7 @@
     .div-props,
     .div-props-bottom {
         width: 32%;
+        /* height: 110px; */
         justify-content: space-between;
     }
 }
@@ -162,4 +192,83 @@
     #sectionTop {
         display: flex;
     }
+
+    ::ng-deep .p-galleria {
+        margin-right: 20px !important;
+    }
 }
+
+
+
+/* ///////////////////////////////////////////////////////////////////// */
+/* ///////////////////////////////////////////////////////////////////// */
+/************ ESTADOS *************/
+/* TITULO */
+.title-bad {
+    color: var(--r400);
+}
+
+.title-warning {
+    color: var(--n600);
+}
+
+.title-good {
+    color: var(--v400);
+}
+
+.title-neutro {
+    color: var(--g500);
+}
+
+
+
+/* SUBTITULO */
+.subtitle-bad {
+    color: var(--r300);
+}
+
+.subtitle-warning {
+    color: var(--n400);
+}
+
+.subtitle-good {
+    color: var(--v300);
+}
+
+.subtitle-neutro {
+    color: var(--g400);
+}
+
+
+/* BORDER */
+.border-bad {
+    border: 2px solid var(--r100);
+}
+
+.border-warning {
+    border: 2px solid var(--n300);
+}
+
+.border-good {
+    border: 2px solid var(--v100);
+}
+
+
+
+/* BACKGROUND */
+.background-bad {
+    background-color: var(--r50);
+}
+
+.background-warning {
+    background-color: var(--n50);
+}
+
+.background-good {
+    background-color: var(--v50);
+}
+
+.background-neutro {
+    background-color: var(--g100);
+}
+
