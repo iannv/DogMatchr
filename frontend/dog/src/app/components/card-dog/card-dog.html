@@ -1,9 +1,9 @@
 <p-card (click)="openDialog()">
     <ng-template #header>
-        <img alt="Card" src="{{dog.image?.url}}" class="dog-img" />
+        <img alt="Card" src="{{dog?.dogapi?.image?.url}}" class="dog-img" />
     </ng-template>
-    <ng-template #title id="template-title"> {{dog.name}} </ng-template>
-    <ng-template #subtitle> {{dog.bred_for}} </ng-template>
+    <ng-template #title id="template-title"> {{dog?.dogapi?.name}} </ng-template>
+    <ng-template #subtitle> {{dog?.dogapi?.bred_for}} </ng-template>
 
     @for (t of temperament; track $index) {
     <p-chip label="{{t}}" />
@@ -14,11 +14,11 @@
         <div class="templateFooter-div">
             <div class="img-wrapper">
                 <img src="assets/reloj.png" class="img-origin-life" alt="life span">
-                <p>{{dog.life_span}}</p>
+                <p>{{dog?.dogapi?.life_span}}</p>
             </div>
             <div>
                 <img src="assets/pais.png" class="img-origin-life" alt="origin">
-                @if (dog.origin) { <p>{{dog.origin}}</p> } @else {<p>-</p>}
+                @if (dog?.dogapi?.origin) { <p>{{dog?.dogapi?.origin}}</p> } @else {<p>-</p>}
             </div>
         </div>
     </ng-template>

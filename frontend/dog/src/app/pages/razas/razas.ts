@@ -46,21 +46,33 @@ export class Razas implements OnInit {
   }
 
   public getAllRazas() {
+    this.cargando = true;
+
     this.razaService.getRazasDogapi().subscribe((razas) => {
       this.arrAllRazas = razas.map((dog) => ({
         dogapi: dog,
-        ninja: [],
+        ninja: undefined, // se carga después si hace falta
       }));
-
       this.chipsFilters.forEach((chip) => {
         return chip;
       });
 
       this.razasFiltradas = [...this.arrAllRazas];
-
       this.cargando = false;
     });
   }
+
+  // this.razaService.getRazas().subscribe((respuesta) => {
+  //   this.arrAllRazas = respuesta;
+  //   // this.arrAllRazas = razas.map((dog) => ({
+  //   //   dogapi: dog,
+  //   //   ninja: [],
+  //   // }));
+
+  //   this.razasFiltradas = [...respuesta];
+
+  //   this.cargando = false;
+  // });
 
   onPageChange(event: PaginatorState) {
     this.first = event.first ?? 0;
@@ -97,11 +109,27 @@ export class Razas implements OnInit {
   filtrarXActividad(valor: ActividadValue | null) {
     if (!valor) {
       this.razasFiltradas = [...this.arrAllRazas];
+      this.first = 0;
       return;
     }
 
     this.razasFiltradas = this.arrAllRazas.filter((raza) =>
-      raza.ninja?.some((n) => n.energy === valor)
+      raza.ninja?.some((ninja) => {
+        const energy = ninja.energy;
+        if (energy == null) return false;
+
+        switch (valor) {
+          case 1:
+            return energy < 3;
+          case 2:
+            return energy === 3;
+          case 3:
+            return energy > 3;
+          default:
+            return false;
+        }
+      })
     );
+    this.first = 0;
   }
 }
