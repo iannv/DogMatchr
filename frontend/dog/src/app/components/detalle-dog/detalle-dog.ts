@@ -76,7 +76,7 @@ export class DetalleDog implements OnChanges, OnDestroy {
         this.estados.mascotas = this.getEstado(this.ninja?.good_with_other_dogs!);
 
         this.images = [];
-        if (this.dogapi.image?.url) {
+        if (this.dogapi?.image?.url) {
           this.images.push({
             itemImageSrc: this.dogapi.image.url,
           });

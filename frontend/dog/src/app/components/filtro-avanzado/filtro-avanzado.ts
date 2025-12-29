@@ -1,12 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Select } from 'primeng/select';
 import { CheckboxModule } from 'primeng/checkbox';
+import { RazaService } from '../../services/raza-service';
+import { ActividadValue } from '../../types/EstadoProps';
 
-interface FiltroOption {
+interface FiltroOption<T = string> {
   label: string;
-  value: string;
+  value: T;
 }
 
 @Component({
@@ -16,14 +18,16 @@ interface FiltroOption {
   styleUrl: './filtro-avanzado.css',
 })
 export class FiltroAvanzado implements OnInit {
+  constructor(private razaService: RazaService) {}
+
   viviendas: FiltroOption[] | undefined;
   selectedVivienda: FiltroOption | undefined;
 
   tiempoLibre: FiltroOption[] | undefined;
   selectedTiempoLibre: FiltroOption | undefined;
 
-  actividad: FiltroOption[] | undefined;
-  selectedActividad: FiltroOption | undefined;
+  actividad: FiltroOption<ActividadValue>[] | undefined;
+  selectedActividad?: FiltroOption<ActividadValue>;
 
   adiestramiento: FiltroOption[] | undefined;
   selectedAdiestramiento: FiltroOption | undefined;
@@ -57,9 +61,9 @@ export class FiltroAvanzado implements OnInit {
     ];
 
     this.actividad = [
-      { label: 'Baja', value: 'baja' },
-      { label: 'Moderada', value: 'moderada' },
-      { label: 'Alta', value: 'alta' },
+      { label: 'Baja', value: 1 },
+      { label: 'Moderada', value: 2 },
+      { label: 'Alta', value: 2 },
     ];
 
     this.adiestramiento = [
@@ -93,6 +97,28 @@ export class FiltroAvanzado implements OnInit {
       { label: 'Jugueton y divertido', value: 'jugueton_divertido' },
       { label: 'Inteligente', value: 'inteligente' },
       { label: 'Independiente', value: 'independiente' },
-    ];  
+    ];
+
+    this.filtrarActividad();
   }
+
+  // Filtros avanzados
+  filtrarVivienda() {}
+
+  filtrarTiempoLibre() {}
+
+  @Output() actividadEmitter = new EventEmitter<ActividadValue | null>();
+  filtrarActividad() {
+    this.actividadEmitter.emit(this.selectedActividad?.value ?? null);
+  }
+
+  filtrarAdiestramiento() {}
+
+  filtrarRuido() {}
+
+  filtrarAseo() {}
+
+  filtrarConvive() {}
+
+  filtrarPersonalidad() {}
 }

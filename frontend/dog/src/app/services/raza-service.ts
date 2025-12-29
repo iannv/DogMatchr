@@ -11,8 +11,12 @@ export class RazaService {
 
   urlApi: string = 'http://127.0.0.1:8000/razas/';
 
-  public getRazas(): Observable<Dogapi[]> {
+  public getRazasDogapi(): Observable<Dogapi[]> {
     return this.http.get<Dogapi[]>(this.urlApi);
+  }
+
+  public getRazas(): Observable<RazaResponse[]> {
+    return this.http.get<RazaResponse[]>(this.urlApi);
   }
 
   public getRazaByName(nombre: string): Observable<Dogapi[]> {

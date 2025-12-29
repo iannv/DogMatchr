@@ -16,6 +16,7 @@ aside {
 label {
     color: var(--g400);
 }
+
 label:not(#labelPersonalidad) {
     font-weight: 600;
 }
@@ -24,12 +25,18 @@ label:not(#labelPersonalidad) {
     font-size: 14px;
 }
 
-::ng-deep .p-select-label {
+::ng-deep .p-select-label.p-placeholder {
+    font-size: 14px;
+    color: var(--g400);
+}
+
+::ng-deep .p-select-label:not(.p-placeholder) {
     font-size: 14px;
     color: var(--n700);
 }
 
-#div-title-filter{
+
+#div-title-filter {
     display: flex;
     align-items: last baseline;
 }
