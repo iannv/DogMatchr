@@ -1,5 +1,5 @@
 <main>
-    <app-filtro-avanzado></app-filtro-avanzado>
+    <app-filtro-avanzado (actividadEmitter)="filtrarXActividad($event)"></app-filtro-avanzado>
 
     <section id="paginatorRazas">
 
@@ -23,7 +23,7 @@
 
             <div class="cards-container">
                 @for (raza of razasPaginadas(); track $index) {
-                <app-card-dog [dog]="raza" (dialog)="openDialogDetalleDog($event)"></app-card-dog>
+                <app-card-dog [dog]="raza.dogapi!" (dialog)="openDialogDetalleDog($event)"></app-card-dog>
                 }
             </div>
             } @else {

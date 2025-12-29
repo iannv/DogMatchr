@@ -6,7 +6,8 @@ import { CardDog } from '../../components/card-dog/card-dog';
 import { Chip } from 'primeng/chip';
 import { Spinner } from '../../components/spinner/spinner';
 import { DetalleDog } from '../../components/detalle-dog/detalle-dog';
-import { FiltroAvanzado } from "../../components/filtro-avanzado/filtro-avanzado";
+import { FiltroAvanzado } from '../../components/filtro-avanzado/filtro-avanzado';
+import { ActividadValue } from '../../types/EstadoProps';
 
 @Component({
   selector: 'app-razas',
@@ -21,8 +22,22 @@ export class Razas implements OnInit {
   cargando: boolean = false;
   first: number = 0;
   rows: number = 20;
-  arrAllRazas: Dogapi[] = [];
-  chipsFilters: string[] = ['Friendly', 'Affectionate', 'Loyal', 'Intelligent', 'Trainable', 'Energetic', 'Calm', 'Gentle', 'Protective', 'Playful']
+
+  arrAllRazas: RazaResponse[] = [];
+  razasFiltradas: RazaResponse[] = [];
+
+  chipsFilters: string[] = [
+    'Friendly',
+    'Affectionate',
+    'Loyal',
+    'Intelligent',
+    'Trainable',
+    'Energetic',
+    'Calm',
+    'Gentle',
+    'Protective',
+    'Playful',
+  ];
 
   constructor(private razaService: RazaService) {}
 
@@ -31,13 +46,17 @@ export class Razas implements OnInit {
   }
 
   public getAllRazas() {
-    this.cargando = true;
-    this.razaService.getRazas().subscribe((respuesta) => {
-      this.arrAllRazas = respuesta;
-      
-      this.chipsFilters.forEach(chip => {
+    this.razaService.getRazasDogapi().subscribe((razas) => {
+      this.arrAllRazas = razas.map((dog) => ({
+        dogapi: dog,
+        ninja: [],
+      }));
+
+      this.chipsFilters.forEach((chip) => {
         return chip;
       });
+
+      this.razasFiltradas = [...this.arrAllRazas];
 
       this.cargando = false;
     });
@@ -50,12 +69,39 @@ export class Razas implements OnInit {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  razasPaginadas(): Dogapi[] {
-    return this.arrAllRazas.slice(this.first, this.first + this.rows);
+  razasPaginadas(): RazaResponse[] {
+    //:Dogapi[]
+    // .arrAllRazas
+    return this.razasFiltradas.slice(this.first, this.first + this.rows);
   }
 
   openDialogDetalleDog(dog: Dogapi) {
     this.selectedRaza = dog.name!;
     this.dialogVisible = true;
+  }
+
+  // /////////////////////////////////////////////////////////////////////////////////////
+  // /////////////////////////////////////////////////////////////////////////////////////
+  // Filtros avanzados
+  aplicarFiltros() {
+    if (!this.actividadSeleccionada) {
+      this.razasFiltradas = [...this.arrAllRazas];
+      return;
+    }
+    this.razasFiltradas = this.arrAllRazas.filter((raza) =>
+      raza.ninja?.some((n) => n.energy === this.actividadSeleccionada)
+    );
+  }
+
+  actividadSeleccionada: ActividadValue | null = null;
+  filtrarXActividad(valor: ActividadValue | null) {
+    if (!valor) {
+      this.razasFiltradas = [...this.arrAllRazas];
+      return;
+    }
+
+    this.razasFiltradas = this.arrAllRazas.filter((raza) =>
+      raza.ninja?.some((n) => n.energy === valor)
+    );
   }
 }

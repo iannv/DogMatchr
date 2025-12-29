@@ -46,7 +46,7 @@ export class Inicio implements OnInit, OnChanges {
 
   public getRazasLimit(limit: number) {
     this.cargando = true;
-    this.razaService.getRazas().subscribe((respuesta) => {
+    this.razaService.getRazasDogapi().subscribe((respuesta) => {
       this.arrRazasLimit = respuesta.slice(0, limit);
       this.cargando = false;
     });

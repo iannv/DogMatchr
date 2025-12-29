@@ -7,3 +7,5 @@ export type EstadoElements = {
   subtitle: string;
   icon: string;
 };
+
+export type ActividadValue = 1 | 2 | 3;
