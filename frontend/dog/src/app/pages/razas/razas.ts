@@ -95,41 +95,23 @@ export class Razas implements OnInit {
   // /////////////////////////////////////////////////////////////////////////////////////
   // /////////////////////////////////////////////////////////////////////////////////////
   // Filtros avanzados
-  aplicarFiltros() {
-    if (!this.actividadSeleccionada) {
-      this.razasFiltradas = [...this.arrAllRazas];
-      return;
-    }
-    this.razasFiltradas = this.arrAllRazas.filter((raza) =>
-      raza.ninja?.some((n) => n.energy === this.actividadSeleccionada)
-    );
-  }
+  actividadSeleccionada: number | null = null;
 
-  actividadSeleccionada: ActividadValue | null = null;
-  filtrarXActividad(valor: ActividadValue | null) {
-    if (!valor) {
+  filtrarXActividad(actividad: number | null) {
+    if (!actividad) {
       this.razasFiltradas = [...this.arrAllRazas];
       this.first = 0;
       return;
     }
 
-    this.razasFiltradas = this.arrAllRazas.filter((raza) =>
-      raza.ninja?.some((ninja) => {
-        const energy = ninja.energy;
-        if (energy == null) return false;
+    this.razaService.getEnergyNinja(actividad).subscribe((ninjaDogs) => {
+      const nombresNinja = ninjaDogs.map((n) => n.name?.toLowerCase());
 
-        switch (valor) {
-          case 1:
-            return energy < 3;
-          case 2:
-            return energy === 3;
-          case 3:
-            return energy > 3;
-          default:
-            return false;
-        }
-      })
-    );
-    this.first = 0;
+      this.razasFiltradas = this.arrAllRazas.filter((raza) =>
+        nombresNinja.includes(raza.dogapi?.name?.toLowerCase())
+      );
+
+      this.first = 0;
+    });
   }
 }
