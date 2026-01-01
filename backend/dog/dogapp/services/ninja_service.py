@@ -10,3 +10,9 @@ def getRaza(nombre):
     headers = {"x-api-key": NINJA_DOG_KEY}
     response = requests.get(urlApi, headers=headers)
     return response.json()
+
+def getEnergy(energy):
+    urlApi = f"https://api.api-ninjas.com/v1/dogs?energy={energy}"
+    headers = {"x-api-key": NINJA_DOG_KEY}
+    response = requests.get(urlApi, headers=headers)
+    return response.json()

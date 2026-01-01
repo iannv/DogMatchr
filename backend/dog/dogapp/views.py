@@ -15,18 +15,6 @@ class RazasView(APIView):
         return Response(data)
 
 
-# class RazaView(APIView):
-#     def get(self, request, id):
-#         data = dogapi_service.getRaza(id)
-#         return Response(data)
-
-#####################
-# Raza search
-# param = request.query_params.get("q", None)
-# data = dogapi_service.getRazaBuscar(param)
-# return Response(data)
-
-
 class RazaView(APIView):
     def get(self, request, nombre):
         dogapi = dogapi_service.getRaza(nombre)
@@ -56,6 +44,13 @@ class RazaViewNinja(APIView):
     def get(self, request):
         param = request.query_params.get("name", None)
         data = ninja_service.getRaza(param)
+        return Response(data)
+
+
+class EnergyView(APIView):
+    def get(self, request):
+        param = request.query_params.get("energy")
+        data = ninja_service.getEnergy(param)
         return Response(data)
 
 
