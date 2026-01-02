@@ -47,10 +47,32 @@ class RazaViewNinja(APIView):
         return Response(data)
 
 
-class EnergyView(APIView):
+class FiltrosAvanzadosView(APIView):
     def get(self, request):
-        param = request.query_params.get("energy")
-        data = ninja_service.getEnergy(param)
+        params = {}
+        energy = request.query_params.get("energy")
+        barking = request.query_params.get("barking")
+        trainability = request.query_params.get("trainability")
+        playfulness = request.query_params.get("playfulness")
+        grooming = request.query_params.get("grooming")
+
+
+        if energy is not None:
+            params["energy"] = energy
+
+        if barking is not None:
+            params["barking"] = barking
+
+        if trainability is not None:
+            params["trainability"] = trainability
+
+        if playfulness is not None:
+            params["playfulness"] = playfulness
+        
+        if grooming is not None:
+            params["grooming"] = grooming
+
+        data = ninja_service.getFiltrosAvanzados(params)
         return Response(data)
 
 

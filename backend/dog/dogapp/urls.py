@@ -6,16 +6,17 @@ from .views import (
     RazaGrupoView,
     # RazaBuscarView,
     RazaFullDatos,
-    EnergyView,
+    FiltrosAvanzadosView,
 )
 
 urlpatterns = [
     path("razas/buscar/", RazaFullDatos.as_view(), name="buscar raza"),
-
     path("razas/", RazasView.as_view(), name="razas"),
+    
+    path("razas/filtrar/", FiltrosAvanzadosView.as_view(), name="filtrar"),
+    
     path("razas/<str:nombre>", RazaView.as_view(), name="raza"),
     path("razas/buscar-grupo/", RazaGrupoView.as_view(), name="buscar-grupo"),
-    
-    path("razas/filtrar/", EnergyView.as_view(), name="actividad"),
-    # path("razas/filtrar", EnergyView.as_view(), name="actividad"),
 ]
+
+# http://127.0.0.1:8000/razas/filtrar/?energy=5&barking=1&trainability=4
