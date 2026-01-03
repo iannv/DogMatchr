@@ -99,26 +99,23 @@ export class FiltroAvanzado implements OnInit {
       { label: 'Independiente', value: 'independiente' },
     ];
 
-    this.filtrarActividad();
+    this.filtrar();
   }
 
   // Filtros avanzados
-  filtrarVivienda() {}
+  razasFiltradas: any[] = [];
+  filtros: any = {
+    energy: null,
+    barking: null,
+    trainability: null,
+    playfulness: null,
+    grooming: null,
+  };
 
-  filtrarTiempoLibre() {}
+  // @Output() actividadEmitter = new EventEmitter<ActividadValue | null>();
+    // this.actividadEmitter.emit(this.selectedActividad?.value ?? null);
 
-  @Output() actividadEmitter = new EventEmitter<ActividadValue | null>();
-  filtrarActividad() {
-    this.actividadEmitter.emit(this.selectedActividad?.value ?? null);
+  filtrar() {
+
   }
-
-  filtrarAdiestramiento() {}
-
-  filtrarRuido() {}
-
-  filtrarAseo() {}
-
-  filtrarConvive() {}
-
-  filtrarPersonalidad() {}
 }

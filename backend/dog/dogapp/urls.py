@@ -17,6 +17,11 @@ urlpatterns = [
     
     path("razas/<str:nombre>", RazaView.as_view(), name="raza"),
     path("razas/buscar-grupo/", RazaGrupoView.as_view(), name="buscar-grupo"),
+    
+    # Filtros avanzados
+    # /razas/filtrar?energy=baja
+    # /razas/filtrar?energy=moderada
+    # /razas/filtrar?energy=alta
 ]
 
 # http://127.0.0.1:8000/razas/filtrar/?energy=5&barking=1&trainability=4

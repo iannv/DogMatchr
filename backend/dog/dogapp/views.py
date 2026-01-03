@@ -47,33 +47,33 @@ class RazaViewNinja(APIView):
         return Response(data)
 
 
-class FiltrosAvanzadosView(APIView):
+class FiltrosAvanzadosView(APIView):    
     def get(self, request):
-        params = {}
-        energy = request.query_params.get("energy")
-        barking = request.query_params.get("barking")
-        trainability = request.query_params.get("trainability")
-        playfulness = request.query_params.get("playfulness")
-        grooming = request.query_params.get("grooming")
-
-
-        if energy is not None:
-            params["energy"] = energy
-
-        if barking is not None:
-            params["barking"] = barking
-
-        if trainability is not None:
-            params["trainability"] = trainability
-
-        if playfulness is not None:
-            params["playfulness"] = playfulness
+        ENERGY_MAP = {"baja": [1, 2], "moderada": [3], "alta": [4, 5]}
         
-        if grooming is not None:
-            params["grooming"] = grooming
+        energy = request.query_params.get("energy")
+        resultados = []
+        
+        if energy:
+            niveles = ENERGY_MAP.get(energy, [])
 
-        data = ninja_service.getFiltrosAvanzados(params)
-        return Response(data)
+            for nivel in niveles:
+                params = {"energy": nivel}
+
+                # if barking:
+                #     params["barking"] = barking
+
+                data = ninja_service.getFiltrosAvanzados(params)
+                resultados.extend(data)
+
+        return Response(resultados)
+    
+    # /razas/filtrar?energy=alta&barking=1
+
+        # barking = request.query_params.get("barking")
+        # trainability = request.query_params.get("trainability")
+        # playfulness = request.query_params.get("playfulness")
+        # grooming = request.query_params.get("grooming")
 
 
 # Combinación de razas de ambas apis
