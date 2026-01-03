@@ -10,7 +10,7 @@ export class RazaService {
   constructor(private http: HttpClient) {}
 
   urlApi: string = 'http://127.0.0.1:8000/razas/';
-  urlNinja: string = 'http://127.0.0.1:8000/razas/filtrar/';
+  urlFiltros: string = 'http://127.0.0.1:8000/razas/filtrar/?';
 
   public getRazasDogapi(): Observable<Dogapi[]> {
     return this.http.get<Dogapi[]>(this.urlApi);
@@ -27,8 +27,7 @@ export class RazaService {
   public getRazaDetalle(nombre: string): Observable<RazaResponse> {
     return this.http.get<RazaResponse>(`${this.urlApi}${nombre}`);
   }
-
-  public getEnergyNinja(energy: number): Observable<Ninja[]> {
-    return this.http.get<Ninja[]>(`${this.urlNinja}energy=${energy}`);
+  public getRazasFiltradas(filtros: any) {
+    return this.http.get<any[]>(this.urlFiltros, {params: filtros});
   }
 }

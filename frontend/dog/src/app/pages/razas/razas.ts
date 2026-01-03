@@ -104,7 +104,7 @@ export class Razas implements OnInit {
       return;
     }
 
-    this.razaService.getEnergyNinja(actividad).subscribe((ninjaDogs) => {
+    this.razaService.getRazasFiltradas(actividad).subscribe((ninjaDogs) => {
       const nombresNinja = ninjaDogs.map((n) => n.name?.toLowerCase());
 
       this.razasFiltradas = this.arrAllRazas.filter((raza) =>
