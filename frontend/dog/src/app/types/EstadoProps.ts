@@ -8,4 +8,4 @@ export type EstadoElements = {
   icon: string;
 };
 
-export type ActividadValue = 1 | 2 | 3;
+// export type ActividadValue = 1 | 2 | 3;

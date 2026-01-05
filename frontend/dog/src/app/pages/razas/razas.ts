@@ -7,7 +7,6 @@ import { Chip } from 'primeng/chip';
 import { Spinner } from '../../components/spinner/spinner';
 import { DetalleDog } from '../../components/detalle-dog/detalle-dog';
 import { FiltroAvanzado } from '../../components/filtro-avanzado/filtro-avanzado';
-import { ActividadValue } from '../../types/EstadoProps';
 
 @Component({
   selector: 'app-razas',
@@ -51,7 +50,7 @@ export class Razas implements OnInit {
     this.razaService.getRazasDogapi().subscribe((razas) => {
       this.arrAllRazas = razas.map((dog) => ({
         dogapi: dog,
-        ninja: undefined, // se carga después si hace falta
+        ninja: undefined,
       }));
       this.chipsFilters.forEach((chip) => {
         return chip;
@@ -95,23 +94,48 @@ export class Razas implements OnInit {
   // /////////////////////////////////////////////////////////////////////////////////////
   // /////////////////////////////////////////////////////////////////////////////////////
   // Filtros avanzados
-  actividadSeleccionada: number | null = null;
 
-  filtrarXActividad(actividad: number | null) {
-    if (!actividad) {
+  // onFiltrosChange(filtros: any) {
+  //   this.cargando = true;
+  //   this.razaService.getRazasFiltradas(filtros).subscribe({
+  //     next: (data) => {
+  //       this.arrAllRazas = data;
+  //       this.razasFiltradas = [...data];
+  //       this.first = 0;
+  //       this.cargando = false;
+  //     },
+  //     error: () => {
+  //       this.arrAllRazas = [];
+  //       this.razasFiltradas = [];
+  //       this.first = 0;
+  //       this.cargando = false;
+  //     },
+  //   });
+  // }
+
+  onFiltrosChange(filtros: any) {
+  this.cargando = true;
+  this.first = 0;
+
+  this.razaService.getRazasFiltradas(filtros).subscribe({
+    next: (data) => {
+      this.arrAllRazas = data.map((dog: Dogapi) => ({
+        dogapi: dog,
+        ninja: undefined,
+      }));
+
+      this.chipsFilters.forEach((chip) => {
+        return chip;
+      });
+
       this.razasFiltradas = [...this.arrAllRazas];
-      this.first = 0;
-      return;
-    }
-
-    this.razaService.getRazasFiltradas(actividad).subscribe((ninjaDogs) => {
-      const nombresNinja = ninjaDogs.map((n) => n.name?.toLowerCase());
-
-      this.razasFiltradas = this.arrAllRazas.filter((raza) =>
-        nombresNinja.includes(raza.dogapi?.name?.toLowerCase())
-      );
-
-      this.first = 0;
-    });
-  }
+      this.cargando = false;
+    },
+    error: () => {
+      this.arrAllRazas = [];
+      this.razasFiltradas = [];
+      this.cargando = false;
+    },
+  });
+}
 }
