@@ -79,26 +79,42 @@ class FiltrosAvanzadosView(APIView):
         }
         
         filtros_usuario = {}
-        
-        for filtro in FILTER_MAPS.keys():
+
+        for filtro, mapa in FILTER_MAPS.items():
             valor = request.query_params.get(filtro)
-            if valor:
-                filtros_usuario[filtro] = FILTER_MAPS[filtro].get(valor, [])
-        
+            if valor and valor in mapa:
+                filtros_usuario[filtro] = mapa[valor]
+
+        # 2️⃣ Si no hay filtros, devolvemos vacío (o podrías traer todo)
         if not filtros_usuario:
             return Response([])
 
+        # 3️⃣ Generamos todas las combinaciones posibles
         combinaciones = [
             dict(zip(filtros_usuario.keys(), combo))
             for combo in product(*filtros_usuario.values())
         ]
-        
-        resultados = []
+
+        # 4️⃣ Función para validar realmente los filtros
+        def pasa_filtros(raza):
+            for filtro, valores in filtros_usuario.items():
+                if raza.get(filtro) not in valores:
+                    return False
+            return True
+
+        # 5️⃣ Ejecutamos consultas y eliminamos duplicados por nombre
+        resultados_dict = {}
+
         for params in combinaciones:
             data = ninja_service.getFiltrosAvanzados(params)
-            resultados.extend(data)
 
-        return Response(resultados)
+            for raza in data:
+                if pasa_filtros(raza):
+                    resultados_dict[raza["name"]] = raza
+
+        # 6️⃣ Respuesta final
+        return Response(list(resultados_dict.values()))
+    
     
     # /razas/filtrar?energy=alta&barking=1
 

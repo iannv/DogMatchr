@@ -15,7 +15,7 @@
         class="w-full md:w-56" />
 
     <label for="actividad">Nivel de actividad</label>
-    <p-select [options]="actividad" [(ngModel)]="filtros.energy" (onChange)="filtrar()" [showClear]="true" optionLabel="label" placeholder="Seleccioná"
+    <p-select [options]="actividad" [(ngModel)]="selectedActividad" (onChange)="emitirFiltros()" [showClear]="true" optionLabel="label" placeholder="Seleccioná"
         class="w-full md:w-56" />
 
     <label for="adiestramiento">Importancia del adiestramiento</label>

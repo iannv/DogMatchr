@@ -3,8 +3,6 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Select } from 'primeng/select';
 import { CheckboxModule } from 'primeng/checkbox';
-import { RazaService } from '../../services/raza-service';
-import { ActividadValue } from '../../types/EstadoProps';
 
 interface FiltroOption<T = string> {
   label: string;
@@ -18,7 +16,8 @@ interface FiltroOption<T = string> {
   styleUrl: './filtro-avanzado.css',
 })
 export class FiltroAvanzado implements OnInit {
-  constructor(private razaService: RazaService) {}
+
+  @Output() filtrosChange = new EventEmitter<any>();
 
   viviendas: FiltroOption[] | undefined;
   selectedVivienda: FiltroOption | undefined;
@@ -26,8 +25,8 @@ export class FiltroAvanzado implements OnInit {
   tiempoLibre: FiltroOption[] | undefined;
   selectedTiempoLibre: FiltroOption | undefined;
 
-  actividad: FiltroOption<ActividadValue>[] | undefined;
-  selectedActividad?: FiltroOption<ActividadValue>;
+  actividad: FiltroOption[] | undefined;
+  selectedActividad?: FiltroOption | undefined;
 
   adiestramiento: FiltroOption[] | undefined;
   selectedAdiestramiento: FiltroOption | undefined;
@@ -61,9 +60,9 @@ export class FiltroAvanzado implements OnInit {
     ];
 
     this.actividad = [
-      { label: 'Baja', value: 1 },
-      { label: 'Moderada', value: 2 },
-      { label: 'Alta', value: 2 },
+      { label: 'Baja', value: 'baja' },
+      { label: 'Moderada', value: 'moderada' },
+      { label: 'Alta', value: 'alta' },
     ];
 
     this.adiestramiento = [
@@ -99,23 +98,16 @@ export class FiltroAvanzado implements OnInit {
       { label: 'Independiente', value: 'independiente' },
     ];
 
-    this.filtrar();
   }
 
   // Filtros avanzados
-  razasFiltradas: any[] = [];
-  filtros: any = {
-    energy: null,
-    barking: null,
-    trainability: null,
-    playfulness: null,
-    grooming: null,
-  };
+  emitirFiltros() {
+    const filtros: any = {};
 
-  // @Output() actividadEmitter = new EventEmitter<ActividadValue | null>();
-    // this.actividadEmitter.emit(this.selectedActividad?.value ?? null);
+    if (this.selectedActividad) filtros.energy = this.selectedActividad.value;
+    if (this.selectedRuido) filtros.ruido = this.selectedRuido.value;
 
-  filtrar() {
-
+    this.filtrosChange.emit(filtros);
   }
+
 }
