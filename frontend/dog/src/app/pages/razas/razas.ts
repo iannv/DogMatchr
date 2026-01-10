@@ -95,6 +95,22 @@ export class Razas implements OnInit {
   // /////////////////////////////////////////////////////////////////////////////////////
   // Filtros avanzados
 
+  onFiltrosChange(filtros: any) {
+    this.cargando = true;
+
+    this.razaService.getRazasFiltradas(filtros).subscribe({
+      next: (data) => {
+        this.razasFiltradas = data;
+        this.cargando = false;
+        this.first = 0;
+      },
+      error: (err) => {
+        console.error('Error: ', err);
+        this.cargando = false;
+      },
+    });
+  }
+
   // onFiltrosChange(filtros: any) {
   //   this.cargando = true;
   //   this.razaService.getRazasFiltradas(filtros).subscribe({
@@ -113,29 +129,29 @@ export class Razas implements OnInit {
   //   });
   // }
 
-  onFiltrosChange(filtros: any) {
-  this.cargando = true;
-  this.first = 0;
+  // onFiltrosChange(filtros: any) {
+  // this.cargando = true;
+  // this.first = 0;
 
-  this.razaService.getRazasFiltradas(filtros).subscribe({
-    next: (data) => {
-      this.arrAllRazas = data.map((dog: Dogapi) => ({
-        dogapi: dog,
-        ninja: undefined,
-      }));
+  // this.razaService.getRazasFiltradas(filtros).subscribe({
+  //   next: (data) => {
+  //     this.arrAllRazas = data.map((dog: Dogapi) => ({
+  //       dogapi: dog,
+  //       ninja: undefined,
+  //     }));
 
-      this.chipsFilters.forEach((chip) => {
-        return chip;
-      });
+  //     this.chipsFilters.forEach((chip) => {
+  //       return chip;
+  //     });
 
-      this.razasFiltradas = [...this.arrAllRazas];
-      this.cargando = false;
-    },
-    error: () => {
-      this.arrAllRazas = [];
-      this.razasFiltradas = [];
-      this.cargando = false;
-    },
-  });
-}
+  //     this.razasFiltradas = [...this.arrAllRazas];
+  //     this.cargando = false;
+  //   },
+  //   error: () => {
+  //     this.arrAllRazas = [];
+  //     this.razasFiltradas = [];
+  //     this.cargando = false;
+  //   },
+  // });
+  // }
 }
