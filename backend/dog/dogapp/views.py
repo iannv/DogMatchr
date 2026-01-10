@@ -50,6 +50,7 @@ class RazaViewNinja(APIView):
 
 class FiltrosAvanzadosView(APIView):
     def get(self, request):
+
         FILTER_MAPS = {
             "energy": {
                 "baja": [1, 2],
@@ -77,45 +78,35 @@ class FiltrosAvanzadosView(APIView):
                 "mucho": [4, 5],
             },
         }
-        
-        filtros_usuario = {}
+
+        filtros_api = {}
 
         for filtro, mapa in FILTER_MAPS.items():
             valor = request.query_params.get(filtro)
             if valor and valor in mapa:
-                filtros_usuario[filtro] = mapa[valor]
+                filtros_api[filtro] = mapa[valor]
 
-        # 2️⃣ Si no hay filtros, devolvemos vacío (o podrías traer todo)
-        if not filtros_usuario:
+        if not filtros_api:
             return Response([])
 
-        # 3️⃣ Generamos todas las combinaciones posibles
-        combinaciones = [
-            dict(zip(filtros_usuario.keys(), combo))
-            for combo in product(*filtros_usuario.values())
-        ]
+        # Filtrar con Ninja
+        razas_ninja = ninja_service.getFiltrosAvanzados(filtros_api)
 
-        # 4️⃣ Función para validar realmente los filtros
-        def pasa_filtros(raza):
-            for filtro, valores in filtros_usuario.items():
-                if raza.get(filtro) not in valores:
-                    return False
-            return True
+        # Traer todas las razas de DogAPI
+        razas_dogapi = dogapi_service.getRazas()
 
-        # 5️⃣ Ejecutamos consultas y eliminamos duplicados por nombre
-        resultados_dict = {}
+        resultados = []
 
-        for params in combinaciones:
-            data = ninja_service.getFiltrosAvanzados(params)
+        for ninja in razas_ninja:
+            nombre = ninja["name"].lower()
 
-            for raza in data:
-                if pasa_filtros(raza):
-                    resultados_dict[raza["name"]] = raza
+            dog = next((d for d in razas_dogapi if d["name"].lower() == nombre), None)
 
-        # 6️⃣ Respuesta final
-        return Response(list(resultados_dict.values()))
-    
-    
+            if dog:
+                resultados.append({"dogapi": dog, "ninja": ninja})
+
+        return Response(resultados)
+
     # /razas/filtrar?energy=alta&barking=1
 
     # barking = request.query_params.get("barking")

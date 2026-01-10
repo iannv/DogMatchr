@@ -27,6 +27,7 @@ export class RazaService {
   public getRazaDetalle(nombre: string): Observable<RazaResponse> {
     return this.http.get<RazaResponse>(`${this.urlApi}${nombre}`);
   }
+  
   public getRazasFiltradas(filtros: any) {
     return this.http.get<any[]>(this.urlFiltros, {params: filtros});
   }
