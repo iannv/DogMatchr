@@ -16,7 +16,6 @@ interface FiltroOption<T = string> {
   styleUrl: './filtro-avanzado.css',
 })
 export class FiltroAvanzado implements OnInit {
-
   @Output() filtrosChange = new EventEmitter<any>();
 
   viviendas: FiltroOption[] | undefined;
@@ -91,13 +90,12 @@ export class FiltroAvanzado implements OnInit {
 
     this.personalidad = [
       { label: 'Protector', value: 'protector' },
+      { label: 'Inteligente', value: 'inteligente' },
       { label: 'Tranquilo', value: 'tranquilo' },
       { label: 'Cariñoso y familiar', value: 'cariñoso_familiar' },
-      { label: 'Jugueton y divertido', value: 'jugueton_divertido' },
-      { label: 'Inteligente', value: 'inteligente' },
+      { label: 'Juguetón y divertido', value: 'jugueton_divertido' },
       { label: 'Independiente', value: 'independiente' },
     ];
-
   }
 
   // Filtros avanzados
@@ -106,8 +104,13 @@ export class FiltroAvanzado implements OnInit {
 
     if (this.selectedActividad) filtros.energy = this.selectedActividad.value;
     if (this.selectedRuido) filtros.ruido = this.selectedRuido.value;
+    if (this.selectedAdiestramiento) filtros.adiestramiento = this.selectedAdiestramiento.value;
+    if (this.selectedAseo) filtros.aseo = this.selectedAseo.value;
+    if (this.selectedConvive) filtros.convive = this.selectedConvive.value;
+    if (this.selectedTiempoLibre) filtros.tiempoLibre = this.selectedTiempoLibre.value;
+    if (this.selectedVivienda) filtros.viviendas = this.selectedVivienda.value;
+    if (this.selectedPersonalidad) filtros.personalidad = this.selectedPersonalidad.values;
 
     this.filtrosChange.emit(filtros);
   }
-
 }
