@@ -57,22 +57,22 @@ class FiltrosAvanzadosView(APIView):
                 "moderada": [3],
                 "alta": [4, 5],
             },
-            "barking": {
+            "ruido": {
                 "baja": [1, 2],
                 "moderada": [3],
                 "alta": [4, 5],
             },
-            "trainability": {
+            "adiestramiento": {
                 "no-es-importante": [1, 2],
                 "importante": [3],
                 "muy-importante": [4, 5],
             },
-            "playfulness": {
+            "tiempoLibre": {
                 "baja": [1, 2],
                 "moderada": [3],
                 "alta": [4, 5],
             },
-            "grooming": {
+            "aseo": {
                 "poco": [1, 2],
                 "moderado": [3],
                 "mucho": [4, 5],
@@ -91,6 +91,8 @@ class FiltrosAvanzadosView(APIView):
 
         # Filtrar con Ninja
         razas_ninja = ninja_service.getFiltrosAvanzados(filtros_api)
+        if isinstance(razas_ninja, dict):
+            razas_ninja = [razas_ninja]
 
         # Traer todas las razas de DogAPI
         razas_dogapi = dogapi_service.getRazas()
@@ -98,8 +100,13 @@ class FiltrosAvanzadosView(APIView):
         resultados = []
 
         for ninja in razas_ninja:
-            nombre = ninja["name"].lower()
 
+            nombre = ninja.get("name") or ninja.get("breed") or ninja.get("breed_name")
+
+            if not nombre:
+                continue
+            
+            nombre = nombre.lower()
             dog = next((d for d in razas_dogapi if d["name"].lower() == nombre), None)
 
             if dog:
@@ -107,6 +114,7 @@ class FiltrosAvanzadosView(APIView):
 
         return Response(resultados)
 
+    # http://127.0.0.1:8000/razas/filtrar/?energy=baja
     # /razas/filtrar?energy=alta&barking=1
 
     # barking = request.query_params.get("barking")

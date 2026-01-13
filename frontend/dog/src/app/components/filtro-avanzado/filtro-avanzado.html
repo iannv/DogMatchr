@@ -7,11 +7,11 @@
     <hr>
 
     <label for="vivienda">Tamaño de vivienda</label>
-    <p-select [options]="viviendas" [(ngModel)]="selectedVivienda" [showClear]="true" optionLabel="label" placeholder="Seleccioná"
+    <p-select [options]="viviendas" [(ngModel)]="selectedVivienda" (onChange)="emitirFiltros()" [showClear]="true" optionLabel="label" placeholder="Seleccioná"
         class="w-full md:w-56" />
 
     <label for="tiempoLibre">Tiempo libre diario</label>
-    <p-select [options]="tiempoLibre" [(ngModel)]="selectedTiempoLibre" [showClear]="true" optionLabel="label" placeholder="Seleccioná"
+    <p-select [options]="tiempoLibre" [(ngModel)]="selectedTiempoLibre" (onChange)="emitirFiltros()" [showClear]="true" optionLabel="label" placeholder="Seleccioná"
         class="w-full md:w-56" />
 
     <label for="actividad">Nivel de actividad</label>
@@ -19,19 +19,19 @@
         class="w-full md:w-56" />
 
     <label for="adiestramiento">Importancia del adiestramiento</label>
-    <p-select [options]="adiestramiento" [(ngModel)]="selectedAdiestramiento" [showClear]="true" optionLabel="label"
+    <p-select [options]="adiestramiento" [(ngModel)]="selectedAdiestramiento" (onChange)="emitirFiltros()" [showClear]="true" optionLabel="label"
         placeholder="Seleccioná" class="w-full md:w-56" />
 
     <label for="ruido">Tolerancia al ruido</label>
-    <p-select [options]="ruido" [(ngModel)]="selectedRuido" [showClear]="true" optionLabel="label" placeholder="Seleccioná"
+    <p-select [options]="ruido" [(ngModel)]="selectedRuido" (onChange)="emitirFiltros()" [showClear]="true" optionLabel="label" placeholder="Seleccioná"
         class="w-full md:w-56" />
 
     <label for="aseo">Tiempo para el aseo</label>
-    <p-select [options]="aseo" [(ngModel)]="selectedAseo" [showClear]="true" optionLabel="label" placeholder="Seleccioná"
+    <p-select [options]="aseo" [(ngModel)]="selectedAseo" (onChange)="emitirFiltros()" [showClear]="true" optionLabel="label" placeholder="Seleccioná"
         class="w-full md:w-56" />
 
     <label for="convive">Convive con</label>
-    <p-select [options]="convive" [(ngModel)]="selectedConvive" [showClear]="true" optionLabel="label" placeholder="Seleccioná"
+    <p-select [options]="convive" [(ngModel)]="selectedConvive" (onChange)="emitirFiltros()" [showClear]="true" optionLabel="label" placeholder="Seleccioná"
         class="w-full md:w-56" />
 
     <label for="personalidad">Personalidad que te gusta más</label>
