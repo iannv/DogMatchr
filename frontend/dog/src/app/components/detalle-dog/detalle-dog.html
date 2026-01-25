@@ -16,7 +16,11 @@
             <section id="templateFooter">
                 <div class="templateFooter-div">
 
-                    <p>{{razaResponse?.dogapi?.bred_for}}</p>
+                    <h4>Descripción</h4>
+                    <p class="templateFooter-p">{{razaResponse?.dogapi?.description}}</p>
+
+                    <h4>Historia</h4>
+                    <p class="templateFooter-p">{{razaResponse?.dogapi?.history}}</p>
 
                     @for (t of temperament; track $index) {
                     <p-chip label="{{t}}" class="chip-detalle" />
@@ -120,7 +124,8 @@
                 <div class="div-props-bottom"
                     [ngClass]="[getBorderClass(ninja?.good_with_children), getBackgroundClass(ninja?.good_with_children)]">
                     <div>
-                        <img [src]="`assets/nino-${getIconClass(ninja?.good_with_children)}.png`" alt="niños" class="props-bottom-img">
+                        <img [src]="`assets/nino-${getIconClass(ninja?.good_with_children)}.png`" alt="niños"
+                            class="props-bottom-img">
                         <p [ngClass]="getTitleClass(ninja?.good_with_children)">Niños</p>
                     </div>
                     <span [ngClass]="getSubtitleClass(ninja?.good_with_children)">{{good_with_children_prop}}</span>
@@ -128,7 +133,8 @@
                 <div class="div-props-bottom"
                     [ngClass]="[getBorderClass(ninja?.good_with_strangers!), getBackgroundClass(ninja?.good_with_strangers!)]">
                     <div>
-                        <img [src]="`assets/extranos-${getIconClass(ninja?.good_with_strangers)}.png`" alt="desconocidos" class="props-bottom-img">
+                        <img [src]="`assets/extranos-${getIconClass(ninja?.good_with_strangers)}.png`"
+                            alt="desconocidos" class="props-bottom-img">
                         <p [ngClass]="getTitleClass(ninja?.good_with_strangers!)">Desconocidos</p>
                     </div>
                     <span [ngClass]="getSubtitleClass(ninja?.good_with_strangers!)">{{good_with_strangers}}</span>
@@ -136,7 +142,8 @@
                 <div class="div-props-bottom"
                     [ngClass]="[getBorderClass(ninja?.good_with_other_dogs), getBackgroundClass(ninja?.good_with_other_dogs)]">
                     <div>
-                        <img [src]="`assets/huella-${getIconClass(ninja?.good_with_other_dogs)}.png`" alt="mascotas" class="props-bottom-img">
+                        <img [src]="`assets/huella-${getIconClass(ninja?.good_with_other_dogs)}.png`" alt="mascotas"
+                            class="props-bottom-img">
                         <p [ngClass]="getTitleClass(ninja?.good_with_other_dogs)">Mascotas</p>
                     </div>
                     <span [ngClass]="getSubtitleClass(ninja?.good_with_other_dogs)">{{good_with_other_dogs}}</span>

@@ -16,8 +16,10 @@ export interface Dogapi {
   };
   id?: number;
   name?: string;
+  description?: string;
   breed_group?: string;
   bred_for?: string;
+  history?: string;
   life_span?: string;
   temperament?: string;
   origin?: string;
