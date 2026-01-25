@@ -80,7 +80,7 @@
     align-items: center;
 }
 
-.templateFooter-div p:first-of-type {
+.templateFooter-div .templateFooter-p {
     color: var(--g400);
 }
 

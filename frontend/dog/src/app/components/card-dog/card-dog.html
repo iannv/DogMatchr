@@ -3,7 +3,7 @@
         <img alt="Card" src="{{dog?.dogapi?.image?.url}}" class="dog-img" />
     </ng-template>
     <ng-template #title id="template-title"> {{dog?.dogapi?.name}} </ng-template>
-    <ng-template #subtitle> {{dog?.dogapi?.bred_for}} </ng-template>
+    <ng-template #subtitle> {{dog?.dogapi?.description}} </ng-template>
 
     @for (t of temperament; track $index) {
     <p-chip label="{{t}}" />
