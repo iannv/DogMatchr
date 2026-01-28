@@ -53,41 +53,92 @@ class FiltrosAvanzadosView(APIView):
 
         FILTER_MAPS = {
             "energy": {
-                "baja": [1, 2],
-                "moderada": [3],
-                "alta": [4, 5],
+                "api": "energy",
+                "values": {
+                    "baja": [1, 2],
+                    "moderada": [3],
+                    "alta": [4, 5],
+                },
             },
             "ruido": {
-                "baja": [1, 2],
-                "moderada": [3],
-                "alta": [4, 5],
+                "api": "barking",
+                "values": {
+                    "baja": [1, 2],
+                    "moderada": [3],
+                    "alta": [4, 5],
+                },
             },
             "adiestramiento": {
-                "no-es-importante": [1, 2],
-                "importante": [3],
-                "muy-importante": [4, 5],
+                "api": "trainability",
+                "values": {
+                    "no_importante": [1, 2],
+                    "importante": [3],
+                    "muy_importante": [4, 5],
+                },
             },
             "tiempoLibre": {
-                "baja": [1, 2],
-                "moderada": [3],
-                "alta": [4, 5],
+                "api": "playfulness",
+                "values": {
+                    "baja": [1, 2],
+                    "moderada": [3],
+                    "alta": [4, 5],
+                },
             },
             "aseo": {
-                "poco": [1, 2],
-                "moderado": [3],
-                "mucho": [4, 5],
+                "api": "grooming",
+                "values": {
+                    "poco": [1, 2],
+                    "moderado": [3],
+                    "mucho": [4, 5],
+                },
             },
         }
 
         filtros_api = {}
 
-        for filtro, mapa in FILTER_MAPS.items():
-            valor = request.query_params.get(filtro)
-            if valor and valor in mapa:
-                filtros_api[filtro] = mapa[valor]
+        for filtro_front, config in FILTER_MAPS.items():
+            valor = request.query_params.get(filtro_front)
+
+            if valor and valor in config["values"]:
+                filtros_api[config["api"]] = config["values"][valor]
 
         if not filtros_api:
             return Response([])
+        
+        
+        VIVIENDA_MAPS = {
+            "dpto_chico": {
+                "energy": [1, 2],
+                "barking": [1, 2],
+                "playfulness": [1, 2],
+            },
+            "dpto_amplio": {
+                "energy": [2, 3],
+                "barking": [1, 2],
+                "playfulness": [2, 3],
+            },
+            "casa_sin_patio": {
+                "energy": [3, 4],
+                "barking": [2, 3],
+                "playfulness": [2, 3, 4],
+            },
+            "casa_patio": {
+                "energy": [3, 4, 5],
+                "barking": [2, 3, 4, 5],
+                "playfulness": [3, 4, 5],
+            },
+            "quinta_campo": {
+                "energy": [4, 5],
+                "barking": [3, 4, 5],
+                "playfulness": [4, 5],
+            },
+        }
+        
+        vivienda = request.query_params.get("vivienda")
+        if vivienda and vivienda in VIVIENDA_MAPS:
+            for api_field, valores in VIVIENDA_MAPS[vivienda].items():
+                filtros_api[api_field] = valores
+        
 
         # Filtrar con Ninja
         razas_ninja = ninja_service.getFiltrosAvanzados(filtros_api)
@@ -105,7 +156,7 @@ class FiltrosAvanzadosView(APIView):
 
             if not nombre:
                 continue
-            
+
             nombre = nombre.lower()
             dog = next((d for d in razas_dogapi if d["name"].lower() == nombre), None)
 
@@ -115,6 +166,7 @@ class FiltrosAvanzadosView(APIView):
         return Response(resultados)
 
     # http://127.0.0.1:8000/razas/filtrar/?energy=baja
+    # http://127.0.0.1:8000/razas/filtrar/?barking=baja
     # /razas/filtrar?energy=alta&barking=1
 
     # barking = request.query_params.get("barking")

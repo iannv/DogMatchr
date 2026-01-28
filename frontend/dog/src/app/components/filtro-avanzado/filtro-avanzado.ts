@@ -113,4 +113,7 @@ export class FiltroAvanzado implements OnInit {
 
     this.filtrosChange.emit(filtros);
   }
+
 }
+
+// Funcionan los filtros ACTIVIDAD, ADIESTRAMIENTO, RUIDO
