@@ -102,24 +102,15 @@ class FiltrosAvanzadosView(APIView):
             if valor and valor in config["values"]:
                 filtros_api[config["api"]] = config["values"][valor]
 
-        if not filtros_api:
-            return Response([])
-        
-        
         VIVIENDA_MAPS = {
-            "dpto_chico": {
-                "energy": [1, 2],
+            "dpto": {
+                "energy": [1, 2, 3],
                 "barking": [1, 2],
-                "playfulness": [1, 2],
-            },
-            "dpto_amplio": {
-                "energy": [2, 3],
-                "barking": [1, 2],
-                "playfulness": [2, 3],
+                "playfulness": [1, 2, 3],
             },
             "casa_sin_patio": {
-                "energy": [3, 4],
-                "barking": [2, 3],
+                "energy": [2, 3],
+                "barking": [1, 2, 3],
                 "playfulness": [2, 3, 4],
             },
             "casa_patio": {
@@ -133,12 +124,14 @@ class FiltrosAvanzadosView(APIView):
                 "playfulness": [4, 5],
             },
         }
-        
+
         vivienda = request.query_params.get("vivienda")
         if vivienda and vivienda in VIVIENDA_MAPS:
             for api_field, valores in VIVIENDA_MAPS[vivienda].items():
-                filtros_api[api_field] = valores
-        
+                if api_field in filtros_api:
+                    filtros_api[api_field] = list(set(filtros_api[api_field]) & set(valores))
+                else:
+                    filtros_api[api_field] = valores
 
         # Filtrar con Ninja
         razas_ninja = ninja_service.getFiltrosAvanzados(filtros_api)

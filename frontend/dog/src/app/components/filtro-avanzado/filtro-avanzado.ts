@@ -44,8 +44,7 @@ export class FiltroAvanzado implements OnInit {
 
   ngOnInit() {
     this.viviendas = [
-      { label: 'Departamento chico', value: 'dpto_chico' },
-      { label: 'Departamento amplio', value: 'dpto_amplio' },
+      { label: 'Departamento', value: 'dpto' },
       { label: 'Casa sin patio', value: 'casa_sin_patio' },
       { label: 'Casa con patio', value: 'casa_patio' },
       { label: 'Quinta/Campo', value: 'quinta_campo' },
@@ -113,7 +112,6 @@ export class FiltroAvanzado implements OnInit {
 
     this.filtrosChange.emit(filtros);
   }
-
 }
 
 // Funcionan los filtros ACTIVIDAD, ADIESTRAMIENTO, RUIDO
