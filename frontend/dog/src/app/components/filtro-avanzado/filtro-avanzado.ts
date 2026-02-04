@@ -18,7 +18,7 @@ interface FiltroOption<T = string> {
 export class FiltroAvanzado implements OnInit {
   @Output() filtrosChange = new EventEmitter<any>();
 
-  viviendas: FiltroOption[] | undefined;
+  vivienda: FiltroOption[] | undefined;
   selectedVivienda: FiltroOption | undefined;
 
   tiempoLibre: FiltroOption[] | undefined;
@@ -43,7 +43,7 @@ export class FiltroAvanzado implements OnInit {
   selectedPersonalidad: FiltroOption[] = [];
 
   ngOnInit() {
-    this.viviendas = [
+    this.vivienda = [
       { label: 'Departamento', value: 'dpto' },
       { label: 'Casa sin patio', value: 'casa_sin_patio' },
       { label: 'Casa con patio', value: 'casa_patio' },
@@ -107,7 +107,7 @@ export class FiltroAvanzado implements OnInit {
     if (this.selectedAseo) filtros.aseo = this.selectedAseo.value;
     if (this.selectedConvive) filtros.convive = this.selectedConvive.value;
     if (this.selectedTiempoLibre) filtros.tiempoLibre = this.selectedTiempoLibre.value;
-    if (this.selectedVivienda) filtros.viviendas = this.selectedVivienda.value;
+    if (this.selectedVivienda) filtros.vivienda = this.selectedVivienda.value;
     if (this.selectedPersonalidad) filtros.personalidad = this.selectedPersonalidad.values;
 
     this.filtrosChange.emit(filtros);

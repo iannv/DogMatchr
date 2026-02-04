@@ -51,6 +51,9 @@ class RazaViewNinja(APIView):
 class FiltrosAvanzadosView(APIView):
     def get(self, request):
 
+        # ======================
+        # FILTROS DEL FRONT
+        # ======================
         FILTER_MAPS = {
             "energy": {
                 "api": "energy",
@@ -94,14 +97,16 @@ class FiltrosAvanzadosView(APIView):
             },
         }
 
-        filtros_api = {}
+        filtros_base = {}
 
         for filtro_front, config in FILTER_MAPS.items():
             valor = request.query_params.get(filtro_front)
-
             if valor and valor in config["values"]:
-                filtros_api[config["api"]] = config["values"][valor]
+                filtros_base[config["api"]] = config["values"][valor]
 
+        # ======================
+        # MAPA DE VIVIENDA
+        # ======================
         VIVIENDA_MAPS = {
             "dpto": {
                 "energy": [1, 2, 3],
@@ -126,35 +131,72 @@ class FiltrosAvanzadosView(APIView):
         }
 
         vivienda = request.query_params.get("vivienda")
-        if vivienda and vivienda in VIVIENDA_MAPS:
-            for api_field, valores in VIVIENDA_MAPS[vivienda].items():
-                if api_field in filtros_api:
-                    filtros_api[api_field] = list(set(filtros_api[api_field]) & set(valores))
-                else:
-                    filtros_api[api_field] = valores
 
-        # Filtrar con Ninja
-        razas_ninja = ninja_service.getFiltrosAvanzados(filtros_api)
-        if isinstance(razas_ninja, dict):
-            razas_ninja = [razas_ninja]
+        # ======================
+        # CASO SIN VIVIENDA
+        # ======================
+        if not vivienda:
+            razas_ninja = ninja_service.getFiltrosAvanzados(filtros_base)
+            if isinstance(razas_ninja, dict):
+                razas_ninja = [razas_ninja]
 
-        # Traer todas las razas de DogAPI
+        # ======================
+        # CASO CON VIVIENDA
+        # ======================
+        else:
+            rangos = VIVIENDA_MAPS.get(vivienda)
+            if not rangos:
+                return Response([])
+
+            combinaciones = product(
+                rangos["energy"],
+                rangos["barking"],
+                rangos["playfulness"],
+            )
+
+            razas_ninja_total = []
+
+            for energy, barking, playfulness in combinaciones:
+                filtros = {
+                    "energy": energy,
+                    "barking": barking,
+                    "playfulness": playfulness,
+                }
+
+                # aplicar filtros extra del front
+                filtros.update({
+                    k: v[0] for k, v in filtros_base.items()
+                    if k not in filtros
+                })
+
+                resp = ninja_service.getFiltrosAvanzados(filtros)
+                if isinstance(resp, list):
+                    razas_ninja_total.extend(resp)
+
+            # eliminar duplicados
+            razas_ninja = {
+                r["name"].lower(): r
+                for r in razas_ninja_total
+                if "name" in r
+            }.values()
+
+        # ======================
+        # MATCH CON DOGAPI
+        # ======================
         razas_dogapi = dogapi_service.getRazas()
-
         resultados = []
 
         for ninja in razas_ninja:
-
-            nombre = ninja.get("name") or ninja.get("breed") or ninja.get("breed_name")
-
-            if not nombre:
-                continue
-
-            nombre = nombre.lower()
-            dog = next((d for d in razas_dogapi if d["name"].lower() == nombre), None)
-
+            nombre = ninja["name"].lower()
+            dog = next(
+                (d for d in razas_dogapi if d["name"].lower() == nombre),
+                None,
+            )
             if dog:
-                resultados.append({"dogapi": dog, "ninja": ninja})
+                resultados.append({
+                    "dogapi": dog,
+                    "ninja": ninja
+                })
 
         return Response(resultados)
 
