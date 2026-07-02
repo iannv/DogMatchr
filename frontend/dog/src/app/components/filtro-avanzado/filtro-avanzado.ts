@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Select } from 'primeng/select';
@@ -13,7 +13,7 @@ interface FiltroOption<T = string> {
 
 @Component({
   selector: 'app-filtro-avanzado',
-  imports: [FormsModule, Select, CommonModule, CheckboxModule],
+  imports: [FormsModule, Select, CheckboxModule],
   templateUrl: './filtro-avanzado.html',
   styleUrl: './filtro-avanzado.css',
 })

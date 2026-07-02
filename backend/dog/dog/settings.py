@@ -27,12 +27,11 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "dogapp",
     "rest_framework",
-    "corsheaders",  #Cors
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware", #Cors
-    
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",

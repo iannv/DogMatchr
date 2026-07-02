@@ -27,6 +27,19 @@ class RazasView(APIView):
 # return Response(data)
 
 
+# class RazasImageView(APIView):
+#     def get(self, request, id):
+#         url = f"https://api.thedogapi.com/v1/images/search?breed_ids={id}"
+#         headers = {"x-api-key": settings.THE_DOG_KEY}
+#         res = requests.get(url, headers=headers)
+#         if res.status_code != 200:
+#             return Response({"url": None}, status=res.status_code)
+#         data = res.json()
+#         if not data:
+#             return Response({"url": None})
+#         return Response({"url": data[0].get("url")})
+
+
 class RazaView(APIView):
     def get(self, request, nombre):
         dogapi = dogapi_service.getRaza(nombre)

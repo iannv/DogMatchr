@@ -1,6 +1,7 @@
 <p-card (click)="openDialog()">
     <ng-template #header>
-        <img alt="Card" src="{{dog?.dogapi?.image?.url}}" class="dog-img" />
+        <!-- <img alt="card" src="{{dog?.dogapi?.image?.url}}" class="dog-img" /> -->
+        <img alt="dog" src="{{dog?.dogapi?.image_url}}" class="dog-img" />
     </ng-template>
     <ng-template #title id="template-title"> {{dog?.dogapi?.name}} </ng-template>
     <ng-template #subtitle> {{dog?.dogapi?.bred_for}} </ng-template>
@@ -20,6 +21,7 @@
                 <img src="assets/pais.png" class="img-origin-life" alt="origin">
                 @if (dog?.dogapi?.origin) { <p>{{dog?.dogapi?.origin}}</p> } @else {<p>-</p>}
             </div>
+            <p>{{dog?.dogapi?.description}}</p>
         </div>
     </ng-template>
 </p-card>

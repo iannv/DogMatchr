@@ -15,12 +15,17 @@ export interface Dogapi {
     metric?: string;
   };
   id?: number;
+  url?: string;
   name?: string;
   breed_group?: string;
   bred_for?: string;
   life_span?: string;
   temperament?: string;
   origin?: string;
+  description?: string;
+  history?: string;
+  wikipedia_url?: string;
+  image_url?: string;
   reference_image_id?: string | null;
   image?: Image | null;
 }

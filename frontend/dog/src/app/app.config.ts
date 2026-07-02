@@ -4,7 +4,6 @@ import {
   provideZoneChangeDetection,
 } from '@angular/core';
 import { provideRouter, withInMemoryScrolling, withRouterConfig } from '@angular/router';
-
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
@@ -20,13 +19,16 @@ export const appConfig: ApplicationConfig = {
       withInMemoryScrolling(),
       withRouterConfig({
         onSameUrlNavigation: 'reload',
-      })
+      }),
     ),
     provideClientHydration(withEventReplay()),
     provideHttpClient(),
     providePrimeNG({
       theme: {
         preset: DogMatchrLight,
+        options: {
+          darkModeSelector: false,
+        },
       },
     }),
   ],
