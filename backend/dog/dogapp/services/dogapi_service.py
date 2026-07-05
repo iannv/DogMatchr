@@ -27,10 +27,17 @@ def getRazas():
             "origin": b.get("origin"),
             "description": b.get("description"),
             "history": b.get("history"),
-            "image_url": get_or_create_image(b.get("id"), b.get("name")),
         }
         for b in breeds
     ]
+
+
+# Obtener listado de todas las razas con imágenes
+def getRazasConImagenes():
+    breeds = getRazas()
+    for breed in breeds:
+        breed["image_url"] = get_or_create_image(breed["id"], breed["name"])
+    return breeds
 
 
 # Obtener una raza por su ID
