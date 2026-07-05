@@ -1,0 +1,5 @@
+Descargar imágenes de Wikipedia
+python manage.py download_breed_images
+
+Sincronizar las imágenes de Media/dogs
+python manage.py sync_breed_images 
