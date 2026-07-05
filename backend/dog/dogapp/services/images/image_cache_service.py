@@ -1,8 +1,10 @@
 import json
+import requests
 from pathlib import Path
 from django.conf import settings
 
 CACHE_FILE = Path(settings.BASE_DIR) / "cache" / "breed_images.json"
+DOGS_FOLDER = Path(settings.MEDIA_ROOT) / "dogs"
 
 
 # breed_images.json -> diccionario de python
