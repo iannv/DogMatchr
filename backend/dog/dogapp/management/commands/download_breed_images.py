@@ -1,4 +1,5 @@
 from pathlib import Path
+import time
 from django.conf import settings
 from django.core.management.base import BaseCommand
 from dogapp.services.dogapi_service import getRazas
@@ -28,6 +29,9 @@ class Command(BaseCommand):
             url = image_search_service.search_wikipedia_image(raza["name"])
             if not url:
                 self.stdout.write(f"❌ No encontrada: {raza['name']}")
+                
+                with open('missing_images.txt', 'a', encoding="utf-8") as file:
+                    file.write(f"{raza['id']} - {raza['name']}\n")
                 continue
 
             image_download_service.download_image(url, breed_id)

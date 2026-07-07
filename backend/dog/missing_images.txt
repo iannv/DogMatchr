@@ -1,0 +1,103 @@
+675 - Airedoodle
+6 - Akita
+20 - Aussiedoodle
+366 - Bắc Hà
+26 - Barbet
+677 - Bassettoodle
+377 - Billy
+49 - Bolognese
+689 - Bordoodle
+55 - Boxer
+681 - Brittanydoodle
+687 - Bulloxer
+72 - Cavapom
+77 - Chihuahua
+80 - Chinook
+421 - Chongqing Dog
+82 - Chug
+423 - Chukotka Sled Dog
+678 - Corgipoo
+669 - Dalmadoodle
+92 - Dalmatian
+432 - Denmark Feist
+433 - Dikkulak
+658 - Dorkie
+97 - Doxiepoo
+448 - Faroese Sheepdog
+676 - Foxhoodle
+683 - Frenchton
+685 - Frug
+453 - Gaucho Sheepdog
+690 - German Sheprador
+693 - Goberian
+129 - Harrier
+661 - Havapoo
+479 - Hmong Bobtail Dog
+695 - Huskimo
+682 - Irish Doodle
+492 - Jindo
+495 - Kaikadi
+496 - Kamchatka Sled Dog
+505 - Khala
+507 - Kintamani
+509 - Kombai
+513 - Kunming Dog
+691 - Labraheeler
+694 - Labsky
+515 - Lài
+518 - Langqing
+520 - Levriero Sardo
+157 - Lhasapoo
+521 - Liangshan Dog
+522 - Lithuanian Hound
+161 - Maltese
+660 - Maltshi
+668 - Mastidoodle
+282 - McNab
+534 - Mojee
+170 - Neapolitan Mastiff
+651 - Newfypoo
+181 - Papillon
+554 - Perdigueiro Galego
+696 - Pitsky
+190 - Pointer
+565 - Poitevin
+192 - Pomapoo
+193 - Pomeranian
+194 - Pomsky
+204 - Puli
+205 - Pumi
+574 - Pungsan
+653 - Pyredoodle
+580 - Ratonero Murciano
+672 - Ridgeypoo
+581 - Rize Koyun
+667 - Rottle
+697 - Rottsky
+88 - Rough Collie
+584 - Russian Spaniel
+211 - Russian Toy
+585 - Russo-European Laika
+586 - Ryukyu
+587 - Saarloos Wolfdog
+588 - Sabueso Español
+650 - Saint Berdoodle
+212 - Saint Bernard
+589 - Saint Miguel Cattle Dog
+590 - Saint-Usuge Spaniel
+591 - Sakhalin Husky
+213 - Saluki
+214 - Samoyed
+601 - Segugio Italiano
+224 - Shih Poo
+612 - Smithfield
+680 - Springerdoodle
+616 - St. Hubert Jura Hound
+624 - Tarsus Çatalburun
+630 - Tibetan Kyi Apso
+632 - Tosa
+275 - Treeing Cur
+686 - Valley Bulldog
+636 - Vikhan
+638 - Villanuco de Las Encartaciones
+671 - Vizsladoodle
