@@ -1,6 +1,6 @@
 from django.conf import settings
 import requests
-from dogapp.services.images.image_manager_service import get_or_create_image
+from dogapp.services.images.image_search_service import get_image_path
 
 THE_DOG_KEY = settings.THE_DOG_KEY
 BASE_URL = "https://api.thedogapi.com/v1"
@@ -27,17 +27,10 @@ def getRazas():
             "origin": b.get("origin"),
             "description": b.get("description"),
             "history": b.get("history"),
+            "image_url": f"http://127.0.0.1:8000{get_image_path(b.get("id"))}",
         }
         for b in breeds
     ]
-
-
-# Obtener listado de todas las razas con imágenes
-def getRazasConImagenes():
-    breeds = getRazas()
-    for breed in breeds:
-        breed["image_url"] = get_or_create_image(breed["id"], breed["name"])
-    return breeds
 
 
 # Obtener una raza por su ID

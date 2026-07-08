@@ -47,20 +47,17 @@ export class Inicio implements OnInit, OnChanges {
   public getRazasLimit(limit: number) {
     this.cargando = true;
     this.razaService.getRazasDogapi().subscribe((razas) => {
-      this.arrRazasLimit = razas.slice(0, limit).map((dog) => ({
-        dogapi: dog,
-        ninja: undefined,
-      }));
+      this.arrRazasLimit = [...razas]
+        .sort(() => Math.random() - 0.5)
+        .slice(0, limit)
+        .map((dog) => ({
+          dogapi: dog,
+          ninja: undefined,
+        }));
 
       this.cargando = false;
     });
   }
-    // this.razaService.getRazas().subscribe((respuesta) => {
-    //   this.arrRazasLimit = respuesta.slice(0, limit);
-    //   console.log('RESPUESTA INICIO:', respuesta[0]);
-    //   this.cargando = false;
-    // });
-  
 
   openDialogDetalleDog(dog: RazaResponse) {
     this.selectedRaza = dog.dogapi?.name!;
