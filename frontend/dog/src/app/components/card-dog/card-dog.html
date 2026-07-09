@@ -21,7 +21,8 @@
                 <img src="assets/pais.png" class="img-origin-life" alt="origin">
                 @if (dog?.dogapi?.origin) { <p>{{dog?.dogapi?.origin}}</p> } @else {<p>-</p>}
             </div>
-            <p>{{dog?.dogapi?.description}}</p>
+            <p class="description">{{charDescription}}</p>
+            <!-- <p class="description">{{dog?.dogapi?.description}}</p> -->
         </div>
     </ng-template>
 </p-card>

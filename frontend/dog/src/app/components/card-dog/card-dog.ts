@@ -24,13 +24,22 @@ export class CardDog implements OnInit {
   @Output() dialog = new EventEmitter<RazaResponse>();
 
   temperament?: string[] = [];
+  charDescription: string = '';
 
   ngOnInit() {
     this.temperament = this.dog?.dogapi?.temperament?.split(',');
+
+    const description = this.dog?.dogapi?.description;
+    if (description !== undefined) {
+      if (description.length > 68) {
+        this.charDescription = this.dog?.dogapi?.description?.slice(0, 68) + ' ...';
+      } else {
+        description;
+      }
+    }
   }
 
   openDialog() {
     this.dialog.emit(this.dog);
   }
-
 }

@@ -48,6 +48,10 @@
 
 .templateFooter-div div p {
     margin: 0 0 0px 10px;
+    font-size: 12px;
+}
+
+.templateFooter-div .description{
     font-size: 14px;
 }
 

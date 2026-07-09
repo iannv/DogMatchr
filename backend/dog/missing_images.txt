@@ -89,6 +89,7 @@
 213 - Saluki
 214 - Samoyed
 601 - Segugio Italiano
+604 - Serbian Tricolour Hound
 224 - Shih Poo
 612 - Smithfield
 680 - Springerdoodle
