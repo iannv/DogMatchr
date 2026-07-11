@@ -24,6 +24,7 @@ export class Razas implements OnInit {
   rows: number = 20;
 
   arrAllRazas: RazaResponse[] = [];
+  arrAllRazasFull: RazaResponse[] = [];
   razasFiltradas: RazaResponse[] = [];
 
   chipsFilters: string[] = [
@@ -62,17 +63,12 @@ export class Razas implements OnInit {
     });
   }
 
-  // this.razaService.getRazas().subscribe((respuesta) => {
-  //   this.arrAllRazas = respuesta;
-  //   // this.arrAllRazas = razas.map((dog) => ({
-  //   //   dogapi: dog,
-  //   //   ninja: [],
-  //   // }));
-
-  //   this.razasFiltradas = [...respuesta];
-
-  //   this.cargando = false;
-  // });
+  // Cargar las razas de dogapi + ninja en segundo plano
+  // public getAllRazasFull() {
+  //   this.razaService.getRazasFull().subscribe((razas) => {
+  //     this.arrAllRazasFull = razas;
+  //   });
+  // }
 
   onPageChange(event: PaginatorState) {
     this.first = event.first ?? 0;
@@ -101,7 +97,7 @@ export class Razas implements OnInit {
       return;
     }
     this.razasFiltradas = this.arrAllRazas.filter((raza) =>
-      raza.ninja?.some((n) => n.energy === this.actividadSeleccionada)
+      raza.ninja?.some((n) => n.energy === this.actividadSeleccionada),
     );
   }
 
@@ -128,7 +124,7 @@ export class Razas implements OnInit {
           default:
             return false;
         }
-      })
+      }),
     );
     this.first = 0;
   }

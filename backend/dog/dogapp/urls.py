@@ -6,7 +6,7 @@ from .views import (
     RazaGrupoView,
     # RazaBuscarView,
     RazaFullDatos,
-    # RazasImageView
+    # RazaFullView,
 )
 
 urlpatterns = [
@@ -15,4 +15,6 @@ urlpatterns = [
     path("razas/", RazasView.as_view(), name="razas"),
     path("razas/<str:nombre>", RazaView.as_view(), name="raza"),
     path("razas/buscar-grupo/", RazaGrupoView.as_view(), name="buscar-grupo"),
+    # TheDogApi + Ninja
+    # path("razas/full/", RazaFullView.as_view(), name="raza full"),
 ]

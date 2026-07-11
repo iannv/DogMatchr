@@ -27,19 +27,6 @@ class RazasView(APIView):
 # return Response(data)
 
 
-# class RazasImageView(APIView):
-#     def get(self, request, id):
-#         url = f"https://api.thedogapi.com/v1/images/search?breed_ids={id}"
-#         headers = {"x-api-key": settings.THE_DOG_KEY}
-#         res = requests.get(url, headers=headers)
-#         if res.status_code != 200:
-#             return Response({"url": None}, status=res.status_code)
-#         data = res.json()
-#         if not data:
-#             return Response({"url": None})
-#         return Response({"url": data[0].get("url")})
-
-
 class RazaView(APIView):
     def get(self, request, nombre):
         dogapi = dogapi_service.getRaza(nombre)
@@ -72,7 +59,7 @@ class RazaViewNinja(APIView):
         return Response(data)
 
 
-# Combinación de razas de ambas apis
+# Combinación de razas de ambas apis filtro por name
 class RazaFullDatos(APIView):
     def get(self, request):
         nombre = request.query_params.get("name", "").lower()
@@ -90,3 +77,19 @@ class RazaFullDatos(APIView):
 
             resultados.append({"dogapi": raza, "ninja": info_ninja})
         return Response({"resultados": resultados})
+
+
+# Combinación de razas de ambas apis sin filtro
+# class RazaFullView(APIView):
+#     def get(self, request):
+#         # nombre = request.query_params.get("name", "").lower()
+#         # Obtener todas las razas de DogAPI
+#         dogs = dogapi_service.getRazas()
+
+#         # Obtener info de Ninja por cada raza encontrada
+#         resultados = []
+#         for raza in dogs:
+#             info_ninja = ninja_service.getRaza(raza["name"])
+
+#             resultados.append({"dogapi": raza, "ninja": info_ninja})
+#         return Response(resultados)

@@ -27,6 +27,9 @@ export class RazaService {
     return this.http.get<RazaResponse>(`${this.urlApi}${nombre}`);
   }
 
+  // public getRazasFull(): Observable<RazaResponse[]>{
+  //   return this.http.get<RazaResponse[]>(`${this.urlApi}full/`)
+  // }
   // public getRazaByName(nombre: string): Observable<RazaResponse> {
   //   return this.http.get<RazaResponse>(`${this.urlApi}${nombre}`);
   // }

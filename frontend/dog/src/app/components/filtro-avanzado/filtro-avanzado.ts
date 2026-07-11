@@ -110,6 +110,7 @@ export class FiltroAvanzado implements OnInit {
   @Output() actividadEmitter = new EventEmitter<ActividadValue | null>();
   filtrarActividad() {
     this.actividadEmitter.emit(this.selectedActividad?.value ?? null);
+    console.log('EMITIDO')
   }
 
   filtrarAdiestramiento() {}
