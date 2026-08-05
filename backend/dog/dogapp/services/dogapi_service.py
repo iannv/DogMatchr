@@ -16,6 +16,8 @@ def getRazas():
     if response.status_code != 200:
         return []
     breeds = response.json()
+    
+    # print(f"TheDogAPI devolvió {len(breeds)} razas")
 
     return [
         {
@@ -27,7 +29,7 @@ def getRazas():
             "origin": b.get("origin"),
             "description": b.get("description"),
             "history": b.get("history"),
-            "image_url": f"http://127.0.0.1:8000{get_image_path(b.get("id"))}",
+            "image_url": f"http://127.0.0.1:8000{get_image_path(b.get('id'))}",
         }
         for b in breeds
     ]

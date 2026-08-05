@@ -18,17 +18,19 @@ class BreedNinja(models.Model):
     trainability = models.IntegerField()
     energy = models.IntegerField()
     barking = models.IntegerField()
-    min_life_expectancy = models.IntegerField()
-    max_life_expectancy = models.IntegerField()
-    max_height_male = models.IntegerField()
-    max_height_female = models.IntegerField()
-    max_weight_male = models.IntegerField()
-    max_weight_female = models.IntegerField()
-    min_height_male = models.IntegerField()
-    min_height_female = models.IntegerField()
-    min_weight_male = models.IntegerField()
-    min_weight_female = models.IntegerField()
-
+    min_life_expectancy = models.FloatField()
+    max_life_expectancy = models.FloatField()
+    max_height_male = models.FloatField()
+    max_height_female = models.FloatField()
+    max_weight_male = models.FloatField()
+    max_weight_female = models.FloatField()
+    min_height_male = models.FloatField()
+    min_height_female = models.FloatField()
+    min_weight_male = models.FloatField()
+    min_weight_female = models.FloatField()
+    
+    def __str__(self):
+        return self.name
 
 ############ IMAGENES ############
 class BreedImage(models.Model):

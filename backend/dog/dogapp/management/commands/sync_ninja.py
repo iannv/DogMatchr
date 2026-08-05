@@ -11,7 +11,6 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         sincronizadas = 0
-        existe = False
         self.stdout.write("Sincronizando razas...")
         razas_dogapi = getRazas()
         self.stdout.write(f"Se encontraron {len(razas_dogapi)} razas en TheDogApi.")
@@ -19,48 +18,66 @@ class Command(BaseCommand):
         for raza in razas_dogapi:
             breed_id = raza["id"]
             breed_name = raza["name"]
-            raza_ninja = getRaza(nombre=breed_name)
-
-            self.stdout.write(f"Raza_ninja: {raza_ninja}")
-
-            if not raza_ninja:
-                self.stdout.write(f"❌ No encontrada en Ninja: {breed_name}")
+            
+            # La raza existe en la tabla BreedNinja?
+            breed_exist = BreedNinja.objects.filter(breed_id=breed_id).exists()
+                
+            if breed_exist:
                 continue
+                
+            else:
+                raza_ninja = getRaza(nombre=breed_name)
+                self.stdout.write(f"Raza_ninja: {raza_ninja}")
 
-            raza_ninja = raza_ninja[0]
+                if not raza_ninja:
+                    self.stdout.write(f"❌ No encontrada en Ninja: {breed_name}")
+                    continue
+                
+                # La API devuelve una lista
+                raza_ninja = raza_ninja[0]
 
-            BreedNinja.objects.update_or_create(
-                breed_id=breed_id,
-                defaults={
-                    "name": raza_ninja["name"],
-                    "image_link": raza_ninja["image_link"],
-                    "good_with_children": raza_ninja["good_with_children"],
-                    "good_with_other_dogs": raza_ninja["good_with_other_dogs"],
-                    "shedding": raza_ninja["shedding"],
-                    "grooming": raza_ninja["grooming"],
-                    "drooling": raza_ninja["drooling"],
-                    "coat_length": raza_ninja["coat_length"],
-                    "good_with_strangers": raza_ninja["good_with_strangers"],
-                    "playfulness": raza_ninja["playfulness"],
-                    "protectiveness": raza_ninja["protectiveness"],
-                    "trainability": raza_ninja["trainability"],
-                    "energy": raza_ninja["energy"],
-                    "barking": raza_ninja["barking"],
-                    "min_life_expectancy": raza_ninja["min_life_expectancy"],
-                    "max_life_expectancy": raza_ninja["max_life_expectancy"],
-                    "max_height_male": raza_ninja["max_height_male"],
-                    "max_height_female": raza_ninja["max_height_female"],
-                    "max_weight_male": raza_ninja["max_weight_male"],
-                    "max_weight_female": raza_ninja["max_weight_female"],
-                    "min_height_male": raza_ninja["min_height_male"],
-                    "min_height_female": raza_ninja["min_height_female"],
-                    "min_weight_male": raza_ninja["min_weight_male"],
-                    "min_weight_female": raza_ninja["min_weight_female"],
-                },
+                BreedNinja.objects.update_or_create(
+                    breed_id=breed_id,
+                    defaults={
+                        "name": raza_ninja["name"],
+                        "image_link": raza_ninja["image_link"],
+                        "good_with_children": raza_ninja["good_with_children"],
+                        "good_with_other_dogs": raza_ninja["good_with_other_dogs"],
+                        "shedding": raza_ninja["shedding"],
+                        "grooming": raza_ninja["grooming"],
+                        "drooling": raza_ninja["drooling"],
+                        "coat_length": raza_ninja["coat_length"],
+                        "good_with_strangers": raza_ninja["good_with_strangers"],
+                        "playfulness": raza_ninja["playfulness"],
+                        "protectiveness": raza_ninja["protectiveness"],
+                        "trainability": raza_ninja["trainability"],
+                        "energy": raza_ninja["energy"],
+                        "barking": raza_ninja["barking"],
+                        "min_life_expectancy": raza_ninja["min_life_expectancy"],
+                        "max_life_expectancy": raza_ninja["max_life_expectancy"],
+                        "max_height_male": raza_ninja["max_height_male"],
+                        "max_height_female": raza_ninja["max_height_female"],
+                        "max_weight_male": raza_ninja["max_weight_male"],
+                        "max_weight_female": raza_ninja["max_weight_female"],
+                        "min_height_male": raza_ninja["min_height_male"],
+                        "min_height_female": raza_ninja["min_height_female"],
+                        "min_weight_male": raza_ninja["min_weight_male"],
+                        "min_weight_female": raza_ninja["min_weight_female"],
+                    },
+                )
+
+                sincronizadas += 1
+                self.stdout.write(f"✔ Sincronizada: {breed_name}")
+                
+                if sincronizadas >= 100:
+                    break
+                
+            
+        self.stdout.write(
+            self.style.SUCCESS(
+                f"Sincronización finalizada. Razas sincronizadas: {sincronizadas}"
             )
-
-            sincronizadas += 1
-            self.stdout.write(f"✔ Sincronizada: {breed_name}")
+        )
 
     ########################################################################
 
