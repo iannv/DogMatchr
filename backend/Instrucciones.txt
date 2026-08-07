@@ -3,3 +3,6 @@ python manage.py download_breed_images
 
 Sincronizar las imágenes de Media/dogs
 python manage.py sync_breed_images
+
+Sincroniza la API de Ninja a la base de datos (De a 100 consultas por hora)
+python manage.py sync_ninja
