@@ -15,7 +15,6 @@ import { RazaService } from '../../services/raza-service';
 import { Spinner } from '../spinner/spinner';
 import { GalleriaModule } from 'primeng/galleria';
 import { EstadoProps } from '../../types/EstadoProps';
-import { RequiredValidator } from '@angular/forms';
 
 @Component({
   selector: 'app-detalle-dog',

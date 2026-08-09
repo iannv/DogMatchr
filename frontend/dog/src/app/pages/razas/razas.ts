@@ -9,6 +9,11 @@ import { DetalleDog } from '../../components/detalle-dog/detalle-dog';
 import { FiltroAvanzado } from '../../components/filtro-avanzado/filtro-avanzado';
 import { ActividadValue } from '../../types/EstadoProps';
 
+// TODO: en card-dog si no aparece la img de ninja, poner la de la bd
+// TODO: en card-dog poner cards de energy adiestramientos mas chicas (padding) y la img perfil mas chica
+// TODO: en detalle-dog acomodar la gallery, fijarse si funciona el dict de "image" de dogapi
+// TODO: revisar todas las imagenes de los dogs que esten correctas sino descargar nuevamente
+
 @Component({
   selector: 'app-razas',
   imports: [PaginatorModule, CardDog, Spinner, Chip, DetalleDog, FiltroAvanzado],
