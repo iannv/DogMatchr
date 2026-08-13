@@ -75,14 +75,14 @@ export class DetalleDog implements OnChanges, OnDestroy {
         this.estados.mascotas = this.getEstado(this.ninja?.good_with_other_dogs!);
 
         this.images = [];
-        if (this.dogapi?.image_url) {
-          this.images.push({
-            itemImageSrc: this.dogapi.image_url,
-          });
-        }
         if (this.ninja?.image_link) {
           this.images.push({
             itemImageSrc: this.ninja.image_link,
+          });
+        }
+        if (this.dogapi?.image?.url) {
+          this.images.push({
+            itemImageSrc: this.dogapi.image.url,
           });
         }
         console.log('CANTIDAD DE IMAGENES: ' + this.images.length);

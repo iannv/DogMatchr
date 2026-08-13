@@ -92,6 +92,20 @@
 
               <!-- Información no disponible -->
             } @else {
+              <div class="div-vida-origen">
+                <div>
+                  <img src="assets/pais.png" class="img-origin-life" alt="origin" />
+                  @if (razaResponse?.dogapi?.origin) {
+                    <p>{{ razaResponse?.dogapi?.origin }}</p>
+                  } @else {
+                    <p>-</p>
+                  }
+                </div>
+                <div class="img-wrapper">
+                  <img src="assets/reloj.png" class="img-origin-life" alt="life span" />
+                  <p>{{ razaResponse?.dogapi?.life_span }}</p>
+                </div>
+              </div>
               <div class="div-attr">
                 <!-- <div class="img-wrapper-attr">
                             <i class="pi pi-angle-right" style="font-size: 20px; color: var(--g400); opacity: 0.7;"></i>
@@ -111,6 +125,11 @@
                   ></i>
                   <p><strong>Peso: </strong><span class="no-disponible">No disponible</span></p>
                 </div>
+              </div>
+              <!-- Descripción e historia -->
+              <div class="description-history">
+                <p><span>Description: </span> {{ razaResponse?.dogapi?.description }}</p>
+                <p><span>History: </span> {{ razaResponse?.dogapi?.history }}</p>
               </div>
             }
           </div>
