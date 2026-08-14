@@ -80,6 +80,11 @@ export class DetalleDog implements OnChanges, OnDestroy {
             itemImageSrc: this.ninja.image_link,
           });
         }
+        if (this.dogapi?.image_url) {
+          this.images.push({
+            itemImageSrc: this.dogapi.image_url,
+          });
+        }
         if (this.dogapi?.image?.url) {
           this.images.push({
             itemImageSrc: this.dogapi.image.url,

@@ -1,6 +1,7 @@
 from django.conf import settings
 import requests
 from dogapp.services.images.image_search_service import get_image_path
+from dogapp.models import BreedImage
 
 THE_DOG_KEY = settings.THE_DOG_KEY
 BASE_URL = "https://api.thedogapi.com/v1"
@@ -16,7 +17,7 @@ def getRazas():
     if response.status_code != 200:
         return []
     breeds = response.json()
-    
+
     # print(f"TheDogAPI devolvió {len(breeds)} razas")
 
     return [
@@ -47,7 +48,16 @@ def getRaza(nombre):
     urlApi = f"https://api.thedogapi.com/v1/breeds/search?q={nombre}"
     headers = {"x-api-key": THE_DOG_KEY}
     response = requests.get(urlApi, headers=headers)
-    return response.json()
+    razas = response.json()
+
+    if not razas:
+        return []
+    for raza in razas:
+        breed_id = raza["id"]
+        imagen = BreedImage.objects.filter(breed_id=breed_id).first()
+        if imagen:
+            raza["image_url"] = f"http://127.0.0.1:8000{imagen.image_path}"
+    return razas
 
 
 # Obtener una raza por grupo
